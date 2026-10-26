@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riffle - Professional Guitar Learning</title>
+    
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        app: {
+                            bg: '#121212',
+                            card: '#1E1E1E',
+                            border: '#333333',
+                            accent: '#FF4500', // Vibrant Orange
+                            accentHover: '#E03D00',
+                            text: '#E5E7EB',
+                            muted: '#9CA3AF'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        tightest: '-0.5px',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4B5563;
+        }
+    </style>
+</head>
+<body class="bg-app-bg text-app-text font-sans h-screen flex overflow-hidden selection:bg-app-accent selection:text-white">
+
+    <!-- Fixed Left Sidebar -->
+    <aside class="w-64 bg-app-card border-r border-app-border flex flex-col flex-shrink-0">
+        <div class="h-16 flex items-center px-6 border-b border-app-border">
+            <i data-lucide="guitar" class="text-app-accent w-6 h-6 mr-3"></i>
+            <h1 class="font-serif font-bold text-xl tracking-tightest">Riffle</h1>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
+            <button id="nav-dashboard" onclick="switchView('dashboard')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-accent bg-[#2A2A2A]">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i>
+                Overview
+            </button>
+            <button id="nav-profile" onclick="switchView('profile')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-muted hover:text-app-text hover:bg-[#2A2A2A]">
+                <i data-lucide="user-cog" class="w-5 h-5 mr-3"></i>
+                App Preferences
+            </button>
+            <button id="nav-roadmap" onclick="switchView('roadmap')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-muted hover:text-app-text hover:bg-[#2A2A2A]">
+                <i data-lucide="map" class="w-5 h-5 mr-3"></i>
+                Active Learning Roadmap
+            </button>
+            <button id="nav-library" onclick="switchView('library')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-muted hover:text-app-text hover:bg-[#2A2A2A]">
+                <i data-lucide="library" class="w-5 h-5 mr-3"></i>
+                Sheet Music Library
+            </button>
+            <button id="nav-practice" onclick="switchView('practice')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-muted hover:text-app-text hover:bg-[#2A2A2A]">
+                <i data-lucide="music" class="w-5 h-5 mr-3"></i>
+                Practice Room
+            </button>
+        </nav>
+
+        <div class="p-4 border-t border-app-border">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-app-border flex items-center justify-center text-app-muted">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">Alex Musician</p>
+                    <p class="text-xs text-app-muted">Pro Account</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto p-8 relative">
+        
+        <!-- View 1: Dashboard -->
+        <section id="dashboard" class="view-section max-w-5xl mx-auto">
+            <header class="mb-8">
+                <h2 class="font-serif text-3xl font-semibold tracking-tightest">Overview</h2>
+                <p class="text-app-muted mt-2">Welcome back. You are on Day 14 of your learning plan.</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Main Action Area -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Resume Practice Card -->
+                    <div class="bg-app-card border border-app-border rounded-lg p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                        <div>
+                            <div class="flex items-center text-app-accent mb-2">
+                                <i data-lucide="play-circle" class="w-5 h-5 mr-2"></i>
+                                <span class="text-sm font-semibold uppercase tracking-wider">Up Next</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-semibold tracking-tightest mb-1">Alternate Picking Mastery</h3>
+                            <p class="text-app-muted text-sm">Current Goal: Master 'Acoustic Pop' Roadmap (10 mins)</p>
+                        </div>
+                        <button class="mt-4 sm:mt-0 bg-app-accent hover:bg-app-accentHover text-white px-6 py-2.5 rounded-md font-medium transition-colors flex items-center">
+                            Resume Practice
+                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- Daily Exercises -->
+                    <div>
+                        <h3 class="font-serif text-xl font-semibold tracking-tightest mb-4">Daily Recommended Exercises</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-app-card border border-app-border rounded-lg p-5">
+                                <h4 class="font-medium mb-1">Strumming Pattern #4</h4>
+                                <p class="text-sm text-app-muted mb-4">Focus on syncopation consistency.</p>
+                                <button class="text-app-accent hover:text-white text-sm font-medium flex items-center transition-colors">
+                                    Start Drill <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                                </button>
+                            </div>
+                            <div class="bg-app-card border border-app-border rounded-lg p-5">
+                                <h4 class="font-medium mb-1">Chord Transition</h4>
+                                <p class="text-sm text-app-muted mb-4">G Major to B Minor block changes.</p>
+                                <button class="text-app-accent hover:text-white text-sm font-medium flex items-center transition-colors">
+                                    Start Drill <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar Area -->
+                <div class="space-y-6">
+                    <!-- Progress Stats -->
+                    <div class="bg-app-card border border-app-border rounded-lg p-6">
+                        <h3 class="font-serif text-lg font-semibold tracking-tightest mb-4 border-b border-app-border pb-2">Progress Statistics</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <span class="block text-xs text-app-muted uppercase tracking-wider mb-1">Skill Level</span>
+                                <span class="font-medium">Intermediate</span>
+                            </li>
+                            <li>
+                                <span class="block text-xs text-app-muted uppercase tracking-wider mb-1">Active Genres</span>
+                                <span class="font-medium">Indie Folk, Classic Rock</span>
+                            </li>
+                            <li>
+                                <span class="block text-xs text-app-muted uppercase tracking-wider mb-1">Chords Learned</span>
+                                <span class="font-medium text-2xl font-serif">42</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Scans -->
+                    <div class="bg-app-card border border-app-border rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4 border-b border-app-border pb-2">
+                            <h3 class="font-serif text-lg font-semibold tracking-tightest">Recent Scans</h3>
+                            <button onclick="switchView('library')" class="text-app-muted hover:text-app-accent"><i data-lucide="plus" class="w-5 h-5"></i></button>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-sm">
+                                <i data-lucide="file-text" class="w-4 h-4 text-app-muted mr-3"></i>
+                                <span class="truncate flex-1">Wonderwall_Chords.pdf</span>
+                            </li>
+                            <li class="flex items-center text-sm">
+                                <i data-lucide="image" class="w-4 h-4 text-app-muted mr-3"></i>
+                                <span class="truncate flex-1">Autumn_Leaves_Lead.png</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 2: Profile & Preferences -->
+        <section id="profile" class="view-section hidden max-w-3xl mx-auto">
+            <header class="mb-8">
+                <h2 class="font-serif text-3xl font-semibold tracking-tightest">App Preferences</h2>
+                <p class="text-app-muted mt-2">Configure your learning profile and system settings.</p>
+            </header>
+
+            <div class="space-y-8">
+                <!-- Skill Level -->
+                <div class="bg-app-card border border-app-border rounded-lg p-6">
+                    <h3 class="font-serif text-lg font-semibold tracking-tightest mb-4">Skill Level</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="skill" class="peer sr-only">
+                            <div class="border border-app-border rounded-md p-4 peer-checked:border-app-accent peer-checked:bg-[#2A1610] transition-colors">
+                                <h4 class="font-medium mb-1">Beginner</h4>
+                                <p class="text-xs text-app-muted">New to the instrument.</p>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="skill" checked class="peer sr-only">
+                            <div class="border border-app-border rounded-md p-4 peer-checked:border-app-accent peer-checked:bg-[#2A1610] transition-colors">
+                                <h4 class="font-medium mb-1 text-app-accent">Intermediate</h4>
+                                <p class="text-xs text-app-muted">Know basic chords.</p>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="skill" class="peer sr-only">
+                            <div class="border border-app-border rounded-md p-4 peer-checked:border-app-accent peer-checked:bg-[#2A1610] transition-colors">
+                                <h4 class="font-medium mb-1">Advanced</h4>
+                                <p class="text-xs text-app-muted">Focus on mastery & theory.</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Genres -->
+                <div class="bg-app-card border border-app-border rounded-lg p-6">
+                    <h3 class="font-serif text-lg font-semibold tracking-tightest mb-4">Target Genres</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <label class="cursor-pointer">
+                            <input type="checkbox" checked class="peer sr-only">
+                            <div class="border border-app-border rounded-full px-4 py-2 text-sm peer-checked:border-app-accent peer-checked:text-app-accent transition-colors">
+                                Acoustic / Folk
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="checkbox" checked class="peer sr-only">
+                            <div class="border border-app-border rounded-full px-4 py-2 text-sm peer-checked:border-app-accent peer-checked:text-app-accent transition-colors">
+                                Rock & Alternative
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="checkbox" class="peer sr-only">
+                            <div class="border border-app-border rounded-full px-4 py-2 text-sm peer-checked:border-app-accent peer-checked:text-app-accent transition-colors">
+                                Jazz & Blues
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="checkbox" class="peer sr-only">
+                            <div class="border border-app-border rounded-full px-4 py-2 text-sm peer-checked:border-app-accent peer-checked:text-app-accent transition-colors">
+                                Metal
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="checkbox" class="peer sr-only">
+                            <div class="border border-app-border rounded-full px-4 py-2 text-sm peer-checked:border-app-accent peer-checked:text-app-accent transition-colors">
+                                Classical
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- System Toggles -->
+                <div class="bg-app-card border border-app-border rounded-lg p-6 space-y-6">
+                    <h3 class="font-serif text-lg font-semibold tracking-tightest mb-4 border-b border-app-border pb-2">System Settings</h3>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium">Continuous AI Adaptation</h4>
+                            <p class="text-sm text-app-muted">Dynamically update background learning prompt based on practice history.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-app-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-app-accent"></div>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium">Cloud Sync</h4>
+                            <p class="text-sm text-app-muted">Sync chord bank and library across devices.</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-app-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-app-accent"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button class="bg-app-accent hover:bg-app-accentHover text-white px-6 py-2.5 rounded-md font-medium transition-colors">
+                        Save Preferences
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 3: Learning Roadmap -->
+        <section id="roadmap" class="view-section hidden max-w-4xl mx-auto">
+            <header class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="font-serif text-3xl font-semibold tracking-tightest">Active Learning Roadmap</h2>
+                    <p class="text-app-muted mt-2">Targeting: The Indie Folk Foundation</p>
+                </div>
+                <button class="bg-app-accent hover:bg-app-accentHover text-white px-5 py-2.5 rounded-md font-medium transition-colors flex items-center shadow-none">
+                    <i data-lucide="refresh-cw" class="w-4 h-4 mr-2"></i>
+                    Generate New Roadmap
+                </button>
+            </header>
+
+            <div class="bg-app-card border border-app-border rounded-lg p-8">
+                <div class="relative border-l border-app-border ml-3 space-y-8">
+                    
+                    <!-- Phase 1 (Done) -->
+                    <div class="relative pl-8">
+                        <span class="absolute -left-3 top-1 bg-app-bg text-[#10B981] rounded-full">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 bg-[#10B981] text-app-bg rounded-full"></i>
+                        </span>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-serif text-xl font-medium tracking-tightest text-app-muted">Phase 1: Mastering 7th Chords</h3>
+                            <span class="text-xs text-[#10B981] font-medium border border-[#10B981] rounded px-2 py-1">Completed</span>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 (Active) -->
+                    <div class="relative pl-8">
+                        <span class="absolute -left-3 top-1 bg-app-bg text-app-accent rounded-full">
+                            <i data-lucide="circle-dot" class="w-6 h-6"></i>
+                        </span>
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-serif text-xl font-medium tracking-tightest text-white">Phase 2: Fingerpicking Basics</h3>
+                            <span class="text-xs text-app-accent font-medium border border-app-accent rounded px-2 py-1">In Progress</span>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div class="bg-[#121212] border border-app-border rounded p-4 flex items-center justify-between group cursor-pointer hover:border-app-accent transition-colors">
+                                <div class="flex items-center">
+                                    <i data-lucide="play" class="w-4 h-4 text-app-muted group-hover:text-app-accent mr-3 transition-colors"></i>
+                                    <span class="font-medium">Travis Picking Pattern A</span>
+                                </div>
+                                <span class="text-xs text-app-muted">15 mins</span>
+                            </div>
+                            <div class="bg-[#121212] border border-app-border rounded p-4 flex items-center justify-between group cursor-pointer hover:border-app-accent transition-colors">
+                                <div class="flex items-center">
+                                    <i data-lucide="lock" class="w-4 h-4 text-app-muted mr-3"></i>
+                                    <span class="font-medium text-app-muted">Travis Picking Pattern B</span>
+                                </div>
+                                <span class="text-xs text-app-muted">Requires Pattern A</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3 (Locked) -->
+                    <div class="relative pl-8">
+                        <span class="absolute -left-3 top-1 bg-app-bg text-app-border rounded-full">
+                            <i data-lucide="circle" class="w-6 h-6"></i>
+                        </span>
+                        <div class="flex items-center justify-between mb-2 opacity-50">
+                            <h3 class="font-serif text-xl font-medium tracking-tightest text-app-muted">Phase 3: Percussive Strumming</h3>
+                            <i data-lucide="lock" class="w-4 h-4 text-app-muted"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 4 (Locked) -->
+                    <div class="relative pl-8">
+                        <span class="absolute -left-3 top-1 bg-app-bg text-app-border rounded-full">
+                            <i data-lucide="circle" class="w-6 h-6"></i>
+                        </span>
+                        <div class="flex items-center justify-between mb-2 opacity-50">
+                            <h3 class="font-serif text-xl font-medium tracking-tightest text-app-muted">Phase 4: Capo Transposition</h3>
+                            <i data-lucide="lock" class="w-4 h-4 text-app-muted"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- View 4: Sheet Music Library -->
+        <section id="library" class="view-section hidden max-w-6xl mx-auto h-[calc(100vh-8rem)] flex flex-col">
+            <header class="mb-6 flex-shrink-0 flex justify-between items-end">
+                <div>
+                    <h2 class="font-serif text-3xl font-semibold tracking-tightest">Sheet Music Library</h2>
+                    <p class="text-app-muted mt-2">Manage files, scan music, and extract chords.</p>
+                </div>
+            </header>
+
+            <div class="flex-1 flex flex-col lg:flex-row gap-6 min-h-0">
+                
+                <!-- Left: File List & Upload -->
+                <div class="w-full lg:w-1/3 flex flex-col gap-4">
+                    <div class="bg-app-card border border-app-border rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-app-muted transition-colors border-dashed">
+                        <div class="w-12 h-12 bg-[#2A2A2A] rounded-full flex items-center justify-center mb-3">
+                            <i data-lucide="upload-cloud" class="w-6 h-6 text-app-text"></i>
+                        </div>
+                        <h3 class="font-medium mb-1">Upload Document</h3>
+                        <p class="text-xs text-app-muted">PDF, PNG, JPG supported</p>
+                    </div>
+
+                    <div class="bg-app-card border border-app-border rounded-lg p-0 flex-1 overflow-y-auto">
+                        <div class="p-4 border-b border-app-border bg-[#1A1A1A]">
+                            <h3 class="font-medium text-sm text-app-muted uppercase tracking-wider">Practice Repertoire</h3>
+                        </div>
+                        <ul class="divide-y divide-app-border">
+                            <li class="p-4 bg-[#2A2A2A] border-l-4 border-app-accent cursor-pointer flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i data-lucide="file-text" class="w-5 h-5 text-app-muted mr-3"></i>
+                                    <span class="font-medium text-sm">Blackbird.pdf</span>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-app-muted"></i>
+                            </li>
+                            <li class="p-4 hover:bg-[#1A1A1A] cursor-pointer flex items-center justify-between transition-colors">
+                                <div class="flex items-center">
+                                    <i data-lucide="file-text" class="w-5 h-5 text-app-muted mr-3"></i>
+                                    <span class="font-medium text-sm text-app-muted">Hotel_California.pdf</span>
+                                </div>
+                            </li>
+                            <li class="p-4 hover:bg-[#1A1A1A] cursor-pointer flex items-center justify-between transition-colors">
+                                <div class="flex items-center">
+                                    <i data-lucide="image" class="w-5 h-5 text-app-muted mr-3"></i>
+                                    <span class="font-medium text-sm text-app-muted">Unknown_Song_Scan.jpg</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: Document Analysis View -->
+                <div class="w-full lg:w-2/3 bg-app-card border border-app-border rounded-lg p-6 flex flex-col">
+                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-app-border">
+                        <div class="flex items-center">
+                            <i data-lucide="file-text" class="w-6 h-6 mr-3 text-app-muted"></i>
+                            <h3 class="font-serif text-xl font-medium tracking-tightest">Blackbird.pdf</h3>
+                        </div>
+                        <button class="text-sm font-medium px-4 py-2 border border-app-border rounded hover:bg-[#2A2A2A] transition-colors">
+                            View Fullscreen
+                        </button>
+                    </div>
+
+                    <div class="flex-1 bg-[#121212] border border-app-border rounded flex items-center justify-center mb-6 overflow-hidden relative">
+                        <!-- Mockup of document content -->
+                        <div class="text-app-muted flex flex-col items-center">
+                            <i data-lucide="file-music" class="w-16 h-16 mb-4 opacity-50"></i>
+                            <p>Document preview rendered here.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1A1A1A] border border-app-border rounded p-5">
+                        <div class="flex items-center text-[#10B981] mb-3">
+                            <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i>
+                            <span class="text-sm font-medium uppercase tracking-wider">Analysis Complete</span>
+                        </div>
+                        <p class="mb-4"><span class="text-app-muted">Detected Chords:</span> <strong class="ml-2 text-lg">Am, C, G, Fmaj7, E7</strong></p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button class="flex-1 bg-[#2A2A2A] hover:bg-[#333333] border border-app-border text-app-text px-4 py-2.5 rounded font-medium transition-colors flex items-center justify-center">
+                                <i data-lucide="bookmark-plus" class="w-4 h-4 mr-2"></i>
+                                Save to Chord Bank
+                            </button>
+                            <button class="flex-1 bg-app-accent hover:bg-app-accentHover text-white px-4 py-2.5 rounded font-medium transition-colors flex items-center justify-center">
+                                <i data-lucide="hammer" class="w-4 h-4 mr-2"></i>
+                                Generate Custom Exercises
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- View 5: Practice Room -->
+        <section id="practice" class="view-section hidden max-w-3xl mx-auto">
+            <header class="mb-8">
+                <h2 class="font-serif text-3xl font-semibold tracking-tightest">Practice Room</h2>
+                <p class="text-app-muted mt-2">Targeted drills based on your recent activity.</p>
+            </header>
+
+            <div class="space-y-6">
+                
+                <!-- Chord Transition Drill -->
+                <div class="bg-app-card border border-app-border rounded-lg p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-serif text-xl font-medium tracking-tightest">Chord Transition Drill</h3>
+                        <div class="flex items-center space-x-4 bg-[#121212] px-3 py-1.5 rounded border border-app-border">
+                            <i data-lucide="metronome" class="w-4 h-4 text-app-muted"></i>
+                            <span class="text-sm text-app-muted">BPM:</span>
+                            <input type="number" value="85" class="w-16 bg-transparent text-white font-medium focus:outline-none text-center appearance-none">
+                            <div class="w-px h-4 bg-app-border"></div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-8 h-4 bg-app-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-app-accent"></div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center py-12 bg-[#121212] rounded border border-app-border mb-4">
+                        <div class="flex items-center space-x-8">
+                            <div class="text-center">
+                                <div class="text-5xl font-bold font-serif mb-2 text-white">Fmaj7</div>
+                                <div class="text-xs text-app-muted">4 beats</div>
+                            </div>
+                            <div class="flex space-x-2 text-app-accent">
+                                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-5xl font-bold font-serif mb-2 text-app-muted">E7</div>
+                                <div class="text-xs text-app-muted">4 beats</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1A1A1A] border-l-4 border-app-accent p-4 rounded text-sm text-app-text flex">
+                        <i data-lucide="info" class="w-5 h-5 text-app-accent mr-3 flex-shrink-0"></i>
+                        <p>Keep your index finger anchored on the first fret to make this transition smoother.</p>
+                    </div>
+                </div>
+
+                <!-- Strumming Generator -->
+                <div class="bg-app-card border border-app-border rounded-lg p-6">
+                    <h3 class="font-serif text-xl font-medium tracking-tightest mb-2">Strumming Generator</h3>
+                    <p class="text-sm text-app-muted mb-6">Genre: Rock | Complexity: Intermediate</p>
+
+                    <div class="flex items-center justify-center space-x-4 sm:space-x-8 py-8 bg-[#121212] rounded border border-app-border mb-6">
+                        <div class="flex flex-col items-center">
+                            <span class="text-2xl font-bold mb-2">D</span>
+                            <i data-lucide="arrow-down" class="w-6 h-6 text-app-accent"></i>
+                        </div>
+                        <span class="text-app-muted">-</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-2xl font-bold mb-2">D</span>
+                            <i data-lucide="arrow-down" class="w-6 h-6 text-app-accent"></i>
+                        </div>
+                        <span class="text-app-muted">→</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-2xl font-bold mb-2 text-app-muted">U</span>
+                            <i data-lucide="arrow-up" class="w-6 h-6 text-app-muted"></i>
+                        </div>
+                        <span class="text-app-muted">↑</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-2xl font-bold mb-2 text-app-muted">U</span>
+                            <i data-lucide="arrow-up" class="w-6 h-6 text-app-muted"></i>
+                        </div>
+                        <span class="text-app-muted">↓</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-2xl font-bold mb-2">D</span>
+                            <i data-lucide="arrow-down" class="w-6 h-6 text-app-accent"></i>
+                        </div>
+                        <span class="text-app-muted">→</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-2xl font-bold mb-2 text-app-muted">U</span>
+                            <i data-lucide="arrow-up" class="w-6 h-6 text-app-muted"></i>
+                        </div>
+                    </div>
+
+                    <button class="w-full border border-app-border hover:bg-[#2A2A2A] text-app-text py-3 rounded font-medium transition-colors flex items-center justify-center">
+                        <i data-lucide="music-4" class="w-4 h-4 mr-2"></i>
+                        Apply to saved [G] and [Cadd9] chords
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // View Switcher Logic
+        function switchView(viewId) {
+            // Hide all sections
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show target section
+            const targetView = document.getElementById(viewId);
+            if (targetView) {
+                targetView.classList.remove('hidden');
+            }
+
+            // Update Navigation Styles
+            document.querySelectorAll('.nav-link').forEach(el => {
+                // Reset to inactive state
+                el.classList.remove('text-app-accent', 'bg-[#2A2A2A]');
+                el.classList.add('text-app-muted', 'hover:text-app-text', 'hover:bg-[#2A2A2A]');
+            });
+
+            // Set active state
+            const activeNav = document.getElementById('nav-' + viewId);
+            if (activeNav) {
+                activeNav.classList.remove('text-app-muted', 'hover:text-app-text', 'hover:bg-[#2A2A2A]');
+                activeNav.classList.add('text-app-accent', 'bg-[#2A2A2A]');
+            }
+        }
+    </script>
+</body>
+</html>
