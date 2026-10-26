@@ -1,0 +1,21 @@
+Account/continuity
+Select skill level
+Genres interested in/playing
+Custom system prompt per user based on uses and history
+Generate custom learning plan 
+Generate Chord/strumming exercises
+    1. Provide difficulty options
+    2. Options to transpose
+Upload/scan a song or sheet music and get the chords and save to Account
+    1. From that, provide chords/save to chord bank
+    2. Offer custom exercises for that song or your chord bank
+    3. Save sheet music (similar to notes app or fourscore)
+Generate Roadmap/checklist
+
+Maybes:
+Answer a few introduction questions to gauge skill level
+Routinely gather learning tips, literatue, lessons, and trends from the web to train
+Microphone inegration
+    1. Listens if user is playing the correct chord
+    2. Interactive play along
+    3. Guitar Hero with real Guitar
