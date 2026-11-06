@@ -1,21 +1,25 @@
-Account/continuity
-Select skill level
-Genres interested in/playing
-Custom system prompt per user based on uses and history
-Generate custom learning plan 
+# Riffle ideas (scratchpad)
+# Promoted into Spec Kit — see specs/README.md and .specify/memory/constitution.md
+# Keep raw brainstorms here; ship via specs before building.
+
+Account/continuity                          → specs/001-core-learning-loop
+Select skill level                          → specs/001-core-learning-loop
+Genres interested in/playing                → specs/001-core-learning-loop
+Custom system prompt per user               → specs/003-adaptive-ai-coach
+Generate custom learning plan               → specs/001 (rule) + 003 (adaptive)
 Generate Chord/strumming exercises
-    1. Provide difficulty options
-    2. Options to transpose
-Upload/scan a song or sheet music and get the chords and save to Account
-    1. From that, provide chords/save to chord bank
-    2. Offer custom exercises for that song or your chord bank
-    3. Save sheet music (similar to notes app or fourscore)
-Generate Roadmap/checklist
+    1. Provide difficulty options           → specs/001-core-learning-loop
+    2. Options to transpose                 → specs/001-core-learning-loop
+Upload/scan a song or sheet music           → specs/002-library-chord-bank
+    1. Chords → chord bank                  → specs/002-library-chord-bank
+    2. Custom exercises for song/bank       → specs/002-library-chord-bank
+    3. Save sheet music                     → specs/002-library-chord-bank
+Generate Roadmap/checklist                  → specs/001-core-learning-loop
 
 Maybes:
-Answer a few introduction questions to gauge skill level
-Routinely gather learning tips, literatue, lessons, and trends from the web to train
-Microphone inegration
-    1. Listens if user is playing the correct chord
+Answer a few introduction questions         → specs/001 (skill check) DONE in spec
+Routinely gather learning tips from web     → specs/003-adaptive-ai-coach (P3)
+Microphone integration                      → specs/004-mic-interactive-practice
+    1. Listens if user plays correct chord
     2. Interactive play along
-    3. Guitar Hero with real Guitar
+    3. Guitar Hero with real Guitar         → product name: "Challenge Lane"
