@@ -10,20 +10,20 @@
 
 ## Phase 1: Setup
 
-- [ ] T001 Inventory current `riffle_web_app.html` behaviors vs spec gaps (difficulty UI, transpose, roadmap regenerate confirm)
-- [ ] T002 [P] Add `tests/unit` harness stub (or document manual-only until extraction)
-- [ ] T003 [P] Create `src/domain` and `src/storage` folders (even if re-exported from HTML later)
+- [x] T001 Inventory current `riffle_web_app.html` behaviors vs spec gaps (difficulty UI, transpose, roadmap regenerate confirm) — see `gap-inventory.md`
+- [x] T002 [P] Add `tests/unit` harness stub (or document manual-only until extraction)
+- [x] T003 [P] Create `src/domain` and `src/storage` folders (even if re-exported from HTML later)
 
 ---
 
 ## Phase 2: Foundational
 
-- [ ] T004 Implement Profile store contract ops in `src/storage/profile-store.js` (list/get/upsert/session/auth/guest)
-- [ ] T005 [P] Implement skill scoring helpers in `src/domain/skill-check.js`
-- [ ] T006 [P] Implement `transposeChord` + clamp in `src/domain/transpose.js`
-- [ ] T007 [P] Implement roadmap template generator in `src/domain/roadmap.js`
-- [ ] T008 [P] Implement exercise presets (chord/strum × difficulty) in `src/domain/exercises.js`
-- [ ] T009 Wire storage + domain into app bootstrap without losing existing profile keys (`chordBank`, `library`, preferences)
+- [x] T004 Implement Profile store contract ops in `src/storage/profile-store.js` (list/get/upsert/session/auth/guest)
+- [x] T005 [P] Implement skill scoring helpers in `src/domain/skill-check.js`
+- [x] T006 [P] Implement `transposeChord` + clamp in `src/domain/transpose.js`
+- [x] T007 [P] Implement roadmap template generator in `src/domain/roadmap.js`
+- [x] T008 [P] Implement exercise presets (chord/strum × difficulty) in `src/domain/exercises.js`
+- [x] T009 Wire storage + domain into app bootstrap without losing existing profile keys (`chordBank`, `library`, preferences)
 
 **Checkpoint**: Foundation ready — stories can proceed
 
@@ -34,11 +34,11 @@
 **Goal**: Sign up, sign in, guest, sign out, reload restore  
 **Independent Test**: Spec US1 acceptance scenarios
 
-- [ ] T010 [US1] Align auth gate UI with validation and error codes from contract
-- [ ] T011 [US1] Ensure `createProfile` / persist / session match data-model.md
-- [ ] T012 [US1] Guest creation path sets `isGuest` and sidebar labeling
-- [ ] T013 [US1] Sign-out clears session and returns auth gate
-- [ ] T014 [US1] Reload restores session profile end-to-end
+- [x] T010 [US1] Align auth gate UI with validation and error codes from contract
+- [x] T011 [US1] Ensure `createProfile` / persist / session match data-model.md
+- [x] T012 [US1] Guest creation path sets `isGuest` and sidebar labeling
+- [x] T013 [US1] Sign-out clears session and returns auth gate
+- [x] T014 [US1] Reload restores session profile end-to-end
 
 **Checkpoint**: Continuity works without roadmap/practice
 
@@ -49,10 +49,10 @@
 **Goal**: Skill check + genre prefs saved  
 **Independent Test**: Spec US2
 
-- [ ] T015 [US2] Skill-check modal uses shared question bank + scoring thresholds
-- [ ] T016 [US2] Manual skill radio + multi-genre save on Profile view
-- [ ] T017 [US2] Retake skill check updates `skillLevel` and `skillCheckDone`
-- [ ] T018 [US2] Dashboard stats reflect skill and genres after save
+- [x] T015 [US2] Skill-check modal uses shared question bank + scoring thresholds
+- [x] T016 [US2] Manual skill radio + multi-genre save on Profile view
+- [x] T017 [US2] Retake skill check updates `skillLevel` and `skillCheckDone`
+- [x] T018 [US2] Dashboard stats reflect skill and genres after save
 
 **Checkpoint**: Preferences durable
 
@@ -63,11 +63,11 @@
 **Goal**: Generate, browse, progress, regenerate with confirm  
 **Independent Test**: Spec US3
 
-- [ ] T019 [US3] Block generate when genres empty; show guidance
-- [ ] T020 [US3] Generate ordered milestones from skill×genre templates
-- [ ] T021 [US3] Lesson view renders steps; support step/milestone completion
-- [ ] T022 [US3] Dashboard next CTA binds to first incomplete milestone
-- [ ] T023 [US3] Regenerate warns and replaces roadmap after confirm
+- [x] T019 [US3] Block generate when genres empty; show guidance
+- [x] T020 [US3] Generate ordered milestones from skill×genre templates
+- [x] T021 [US3] Lesson view renders steps; support step/milestone completion
+- [x] T022 [US3] Dashboard next CTA binds to first incomplete milestone
+- [x] T023 [US3] Regenerate warns and replaces roadmap after confirm
 
 **Checkpoint**: Planning spine usable
 
@@ -78,10 +78,10 @@
 **Goal**: Chord/strum practice with difficulty + transpose + history  
 **Independent Test**: Spec US4
 
-- [ ] T024 [US4] Practice view: choose mode; default difficulty from skill
-- [ ] T025 [US4] Difficulty control remaps progression/pattern density
-- [ ] T026 [US4] Transpose controls update chord labels; clamp with feedback
-- [ ] T027 [US4] Log PracticeEvent into capped `practiceHistory`
+- [x] T024 [US4] Practice view: choose mode; default difficulty from skill
+- [x] T025 [US4] Difficulty control remaps progression/pattern density
+- [x] T026 [US4] Transpose controls update chord labels; clamp with feedback
+- [x] T027 [US4] Log PracticeEvent into capped `practiceHistory`
 
 **Checkpoint**: Daily practice verb works
 
@@ -92,18 +92,18 @@
 **Goal**: Home summarizes state and recent activity  
 **Independent Test**: Spec US5
 
-- [ ] T028 [US5] Dashboard empty states for missing roadmap / no history
-- [ ] T029 [US5] Recent activity list from practiceHistory
-- [ ] T030 [US5] Chord count widget reads `chordBank.length` safely (0 until 002)
+- [x] T028 [US5] Dashboard empty states for missing roadmap / no history
+- [x] T029 [US5] Recent activity list from practiceHistory
+- [x] T030 [US5] Chord count widget reads `chordBank.length` safely (0 until 002)
 
 ---
 
 ## Phase 8: Polish
 
-- [ ] T031 [P] Unit tests for skill thresholds, transpose, roadmap size invariants
-- [ ] T032 Run [quickstart.md](./quickstart.md) and fix gaps
-- [ ] T033 [P] Update root README with how to open the app and where specs live
-- [ ] T034 Extract remaining UI modules only if file size/maintainability demands it
+- [x] T031 [P] Unit tests for skill thresholds, transpose, roadmap size invariants
+- [x] T032 Run [quickstart.md](./quickstart.md) and fix gaps — use `npm start` + manual path; unit suite green
+- [x] T033 [P] Update root README with how to open the app and where specs live
+- [x] T034 Extract remaining UI modules only if file size/maintainability demands it — extracted to `src/app.js` + domain/storage
 
 ---
 

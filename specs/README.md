@@ -18,8 +18,11 @@ chords, exercises, and a living roadmap.
 |----|---------|--------|----------|
 | [001](001-core-learning-loop/) | Accounts, skill/genres, roadmap, practice loop | Spec + plan + tasks | P0 MVP |
 | [002](002-library-chord-bank/) | Upload/scan, chord extract, chord bank, song exercises | Spec + plan + tasks | P0 MVP |
-| [003](003-adaptive-ai-coach/) | Custom learning prompt, adaptive plan, curated tips | Spec ready | P1 |
+| [003](003-adaptive-ai-coach/) | Custom learning prompt, adaptive plan, curated tips | Spec ready (P1 prompt loop started) | P1 |
 | [004](004-mic-interactive-practice/) | Mic chord listen, play-along, real-guitar scoring | Spec draft (maybe) | P2 |
+
+Partner B notes: [001/partner-b-acceptance.md](001-core-learning-loop/partner-b-acceptance.md).  
+Fretboard diagrams (#14): Later — after chord bank entries exist in **002**.
 
 ## Recommended workflow
 

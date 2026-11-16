@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -182,20 +182,27 @@
                         <h3 class="font-serif text-xl font-semibold tracking-tightest mb-4">Daily Recommended Exercises</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="bg-app-card border border-app-border rounded-lg p-5">
-                                <h4 class="font-medium mb-1">Strumming Pattern #4</h4>
-                                <p class="text-sm text-app-muted mb-4">Focus on syncopation consistency.</p>
-                                <button onclick="switchView('practice')" class="text-app-accent hover:text-white text-sm font-medium flex items-center transition-colors">
+                                <h4 class="font-medium mb-1">Strumming drill</h4>
+                                <p class="text-sm text-app-muted mb-4">Difficulty defaults to your skill level.</p>
+                                <button onclick="openPractice('strum')" class="text-app-accent hover:text-white text-sm font-medium flex items-center transition-colors">
                                     Start Drill <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
                                 </button>
                             </div>
                             <div class="bg-app-card border border-app-border rounded-lg p-5">
-                                <h4 class="font-medium mb-1">Chord Transition</h4>
-                                <p class="text-sm text-app-muted mb-4">G Major to B Minor block changes.</p>
-                                <button onclick="switchView('practice')" class="text-app-accent hover:text-white text-sm font-medium flex items-center transition-colors">
+                                <h4 class="font-medium mb-1">Chord transitions</h4>
+                                <p class="text-sm text-app-muted mb-4">Transpose and log to keep continuity.</p>
+                                <button onclick="openPractice('chord')" class="text-app-accent hover:text-white text-sm font-medium flex items-center transition-colors">
                                     Start Drill <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
                                 </button>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="bg-app-card border border-app-border rounded-lg p-6">
+                        <h3 class="font-serif text-lg font-semibold tracking-tightest mb-4 border-b border-app-border pb-2">Recent activity</h3>
+                        <ul id="recent-activity" class="space-y-3">
+                            <li class="text-sm text-app-muted">No practice logged yet. Complete a lesson or drill to see it here.</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -224,7 +231,7 @@
                             <button onclick="switchView('library')" class="text-app-muted hover:text-app-accent"><i data-lucide="plus" class="w-5 h-5"></i></button>
                         </div>
                         <ul id="recent-scans" class="space-y-3">
-                            <li class="text-sm text-app-muted">No scans yet — Partner A owns the library track.</li>
+                            <li class="text-sm text-app-muted">No scans yet — library uploads land in spec 002.</li>
                         </ul>
                     </div>
                 </div>
@@ -308,8 +315,8 @@
 
                     <div class="flex items-center justify-between">
                         <div>
-                            <h4 class="font-medium">Cloud Sync</h4>
-                            <p class="text-sm text-app-muted">Export/import your profile for now. Real multi-device sync comes later.</p>
+                            <h4 class="font-medium">Local backup tools</h4>
+                            <p class="text-sm text-app-muted">Not multi-device cloud sync. Toggle to reveal export/import for this profile (library, chord bank, roadmap, prefs).</p>
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input id="pref-cloud" type="checkbox" class="sr-only peer">
@@ -318,7 +325,7 @@
                     </div>
 
                     <div id="cloud-tools" class="hidden pt-2 border-t border-app-border space-y-3">
-                        <p class="text-sm text-app-muted">Local backup until real cloud auth lands.</p>
+                        <p class="text-sm text-app-muted">Interim path only — real cloud sync is deferred pending infrastructure (Partner B ticket 11).</p>
                         <div class="flex flex-wrap gap-3">
                             <button type="button" onclick="exportProfile()" class="border border-app-border hover:bg-[#2A2A2A] px-4 py-2 rounded-md text-sm font-medium transition-colors">Export JSON</button>
                             <label class="border border-app-border hover:bg-[#2A2A2A] px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer">
@@ -331,9 +338,14 @@
 
                 <div class="bg-app-card border border-app-border rounded-lg p-6">
                     <h3 class="font-serif text-lg font-semibold tracking-tightest mb-2">Learning prompt</h3>
-                    <p class="text-sm text-app-muted mb-4">Built from your skill, genres, and practice history when AI adaptation is on.</p>
+                    <p class="text-sm text-app-muted mb-2">Guidance generated from this profile (skill, genres, practice history). Not authoritative teacher instruction.</p>
+                    <p id="learning-prompt-meta" class="text-xs text-app-muted mb-4">Not generated yet.</p>
                     <pre id="learning-prompt" class="bg-[#121212] border border-app-border rounded-md p-4 text-xs text-app-muted whitespace-pre-wrap font-sans min-h-[5rem]">Save preferences to generate a prompt.</pre>
-                    <button type="button" onclick="rerunSkillCheck()" class="mt-4 text-sm text-app-accent hover:text-white font-medium">Retake skill check</button>
+                    <div class="mt-4 flex flex-wrap gap-4">
+                        <button type="button" onclick="regenerateLearningPrompt()" class="text-sm text-app-accent hover:text-white font-medium">Regenerate prompt</button>
+                        <button type="button" onclick="resetLearningPrompt()" class="text-sm text-app-muted hover:text-app-text font-medium">Reset to default</button>
+                        <button type="button" onclick="rerunSkillCheck()" class="text-sm text-app-muted hover:text-app-text font-medium">Retake skill check</button>
+                    </div>
                 </div>
 
                 <div class="flex justify-end gap-3">
@@ -363,7 +375,7 @@
             </div>
         </section>
 
-        <!-- Lesson Player -->
+        <!-- Lesson Player (guided drill) -->
         <section id="lesson" class="view-section hidden max-w-3xl mx-auto">
             <header class="mb-8">
                 <button onclick="switchView('roadmap')" class="text-sm text-app-muted hover:text-app-accent mb-3 inline-flex items-center">
@@ -374,9 +386,39 @@
             </header>
 
             <div class="bg-app-card border border-app-border rounded-lg p-6 space-y-6">
-                <div id="lesson-steps" class="space-y-3"></div>
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <p id="lesson-step-progress" class="text-sm text-app-muted">Step 1 of 1</p>
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs text-app-muted uppercase tracking-wider" for="lesson-bpm">BPM</label>
+                        <input id="lesson-bpm" type="number" min="40" max="180" value="72"
+                               onchange="onLessonBpmChange()"
+                               class="w-16 bg-[#121212] border border-app-border rounded-md px-2 py-1.5 text-sm text-center focus:outline-none focus:border-app-accent">
+                        <button type="button" id="lesson-timer-btn" onclick="toggleLessonTimer()"
+                                class="border border-app-border hover:bg-[#2A2A2A] px-3 py-1.5 rounded-md text-sm font-medium transition-colors">
+                            Start
+                        </button>
+                        <span id="lesson-beat-indicator" class="text-sm text-app-accent font-medium min-w-[3rem]">—</span>
+                    </div>
+                </div>
+
+                <div id="lesson-stage" class="bg-[#121212] border border-app-border rounded-lg p-8 space-y-6">
+                    <p id="lesson-current-step" class="font-serif text-2xl font-semibold tracking-tightest text-center leading-snug">—</p>
+                    <div id="lesson-cue" class="text-center space-y-3"></div>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" onclick="lessonPrevStep()" class="border border-app-border hover:bg-[#2A2A2A] px-4 py-2.5 rounded-md font-medium transition-colors">Previous step</button>
+                    <button type="button" onclick="lessonCompleteStep()" class="flex-1 bg-app-accent hover:bg-app-accentHover text-white px-4 py-2.5 rounded-md font-medium transition-colors">Complete step</button>
+                </div>
+
+                <div>
+                    <p class="text-xs text-app-muted uppercase tracking-wider mb-2">Progress</p>
+                    <ul id="lesson-steps" class="space-y-1.5"></ul>
+                </div>
+
                 <div class="flex flex-col sm:flex-row gap-3">
-                    <button onclick="completeCurrentLesson()" class="flex-1 bg-app-accent hover:bg-app-accentHover text-white px-4 py-2.5 rounded-md font-medium transition-colors">
+                    <button id="lesson-mark-complete" onclick="completeCurrentLesson()" disabled
+                            class="flex-1 bg-app-accent hover:bg-app-accentHover text-white px-4 py-2.5 rounded-md font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                         Mark lesson complete
                     </button>
                     <button onclick="switchView('practice')" class="flex-1 border border-app-border hover:bg-[#2A2A2A] px-4 py-2.5 rounded-md font-medium transition-colors">
@@ -439,816 +481,48 @@
         <section id="practice" class="view-section hidden max-w-3xl mx-auto">
             <header class="mb-8">
                 <h2 class="font-serif text-3xl font-semibold tracking-tightest">Practice Room</h2>
-                <p class="text-app-muted mt-2">Targeted drills based on your recent activity.</p>
+                <p class="text-app-muted mt-2">Chord and strum drills with difficulty and transpose.</p>
             </header>
 
-            <div class="space-y-6">
-                <div class="bg-app-card border border-app-border rounded-lg p-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <h3 class="font-serif text-xl font-medium tracking-tightest">Chord Transition Drill</h3>
-                        <div class="flex items-center space-x-4 bg-[#121212] px-3 py-1.5 rounded border border-app-border">
-                            <span class="text-sm text-app-muted">BPM:</span>
-                            <input type="number" value="85" class="w-16 bg-transparent text-white font-medium focus:outline-none text-center appearance-none">
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-center py-12 bg-[#121212] rounded border border-app-border mb-4">
-                        <div class="flex items-center space-x-8">
-                            <div class="text-center">
-                                <div class="text-5xl font-bold font-serif mb-2 text-white">Fmaj7</div>
-                                <div class="text-xs text-app-muted">4 beats</div>
-                            </div>
-                            <div class="flex space-x-2 text-app-accent">
-                                <i data-lucide="chevron-right" class="w-6 h-6"></i>
-                                <i data-lucide="chevron-right" class="w-6 h-6"></i>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-5xl font-bold font-serif mb-2 text-app-muted">E7</div>
-                                <div class="text-xs text-app-muted">4 beats</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button onclick="logPracticeEvent('chord-transition', 'Fmaj7 → E7')" class="w-full border border-app-border hover:bg-[#2A2A2A] text-app-text py-3 rounded font-medium transition-colors">
-                        Log practice session
-                    </button>
+            <div class="bg-app-card border border-app-border rounded-lg p-6 space-y-6">
+                <div class="flex flex-wrap gap-3">
+                    <button type="button" id="practice-mode-chord" onclick="setPracticeMode('chord')" class="px-4 py-2 rounded-md text-sm font-medium bg-app-accent text-white">Chord transitions</button>
+                    <button type="button" id="practice-mode-strum" onclick="setPracticeMode('strum')" class="px-4 py-2 rounded-md text-sm font-medium border border-app-border text-app-muted hover:text-app-text">Strumming</button>
                 </div>
 
-                <div class="bg-app-card border border-app-border rounded-lg p-6">
-                    <h3 class="font-serif text-xl font-medium tracking-tightest mb-2">Strumming Generator</h3>
-                    <p class="text-sm text-app-muted mb-6">Genre-aware patterns arrive with Partner A’s practice track.</p>
-                    <button onclick="logPracticeEvent('strumming', 'D D U U D U')" class="w-full border border-app-border hover:bg-[#2A2A2A] text-app-text py-3 rounded font-medium transition-colors flex items-center justify-center">
-                        <i data-lucide="music-4" class="w-4 h-4 mr-2"></i>
-                        Log strumming practice
-                    </button>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-app-muted uppercase tracking-wider mb-2" for="practice-difficulty">Difficulty</label>
+                        <select id="practice-difficulty" onchange="refreshPracticeSession()" class="w-full bg-[#121212] border border-app-border rounded-md px-3 py-2.5 text-sm focus:outline-none focus:border-app-accent">
+                            <option value="easy">Easy</option>
+                            <option value="standard">Standard</option>
+                            <option value="challenge">Challenge</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-app-muted uppercase tracking-wider mb-2">Transpose</label>
+                        <div class="flex items-center gap-2">
+                            <button type="button" onclick="nudgeTranspose(-1)" class="border border-app-border hover:bg-[#2A2A2A] px-3 py-2 rounded-md text-sm">−1</button>
+                            <span id="practice-transpose" class="min-w-[4rem] text-center font-medium">0</span>
+                            <button type="button" onclick="nudgeTranspose(1)" class="border border-app-border hover:bg-[#2A2A2A] px-3 py-2 rounded-md text-sm">+1</button>
+                            <span id="practice-bpm" class="ml-auto text-sm text-app-muted">85 BPM</span>
+                        </div>
+                        <p id="practice-transpose-hint" class="text-xs text-app-muted mt-2 hidden">Transpose clamped to ±6 semitones.</p>
+                    </div>
                 </div>
+
+                <div id="practice-stage" class="flex items-center justify-center py-12 bg-[#121212] rounded border border-app-border"></div>
+
+                <button type="button" onclick="logCurrentPractice()" class="w-full border border-app-border hover:bg-[#2A2A2A] text-app-text py-3 rounded font-medium transition-colors">
+                    Log practice session
+                </button>
             </div>
         </section>
 
     </main>
     </div>
 
-    <script>
-        const STORAGE_ACCOUNTS = 'riffle.accounts';
-        const STORAGE_SESSION = 'riffle.session';
-        const GENRE_LABELS = {
-            'acoustic-folk': 'Acoustic / Folk',
-            'rock-alt': 'Rock & Alternative',
-            'jazz-blues': 'Jazz & Blues',
-            'metal': 'Metal',
-            'classical': 'Classical'
-        };
 
-        const SKILL_QUESTIONS = [
-            {
-                prompt: 'How comfortable are you with open chords (G, C, D, Em, Am)?',
-                options: [
-                    { label: 'Still learning them', score: 0 },
-                    { label: 'I can switch most of them', score: 1 },
-                    { label: 'They are automatic', score: 2 }
-                ]
-            },
-            {
-                prompt: 'Can you keep time while strumming a full song?',
-                options: [
-                    { label: 'Not yet', score: 0 },
-                    { label: 'With a metronome or recording', score: 1 },
-                    { label: 'Yes, steadily', score: 2 }
-                ]
-            },
-            {
-                prompt: 'Have you tried fingerpicking or barre chords?',
-                options: [
-                    { label: 'Neither yet', score: 0 },
-                    { label: 'A little of one', score: 1 },
-                    { label: 'Both regularly', score: 2 }
-                ]
-            }
-        ];
-
-        const LESSON_CONTENT = {
-            travis: {
-                steps: [
-                    'Plant your thumb on the bass strings (E–A–D).',
-                    'Alternate bass notes while keeping the pulse even.',
-                    'Add index/middle pinches on the treble strings.',
-                    'Slow the pattern to 60 BPM, then raise tempo.'
-                ]
-            },
-            percussive: {
-                steps: [
-                    'Mute the strings with your fretting hand.',
-                    'Strike the body or muted strings on beats 2 and 4.',
-                    'Combine a downstroke with a palm slap.',
-                    'Apply the groove to a two-chord loop.'
-                ]
-            },
-            capo: {
-                steps: [
-                    'Place the capo behind a fret without buzzing.',
-                    'Play an open G shape with capo on 2 (sounds as A).',
-                    'Rewrite a song chart using the capo key.',
-                    'Practice moving the capo and renaming chord shapes.'
-                ]
-            },
-            chords: {
-                steps: [
-                    'Review each chord shape slowly.',
-                    'Switch between two chords for four bars each.',
-                    'Add a simple downstroke strum.',
-                    'Loop the progression for two minutes.'
-                ]
-            },
-            strum: {
-                steps: [
-                    'Count 1 & 2 & 3 & 4 & out loud.',
-                    'Play downstrokes on the beat only.',
-                    'Add upstrokes on the off-beats.',
-                    'Lock the pattern to a metronome.'
-                ]
-            }
-        };
-
-        let authTab = 'signin';
-        let currentUser = null;
-        let skillCheckIndex = 0;
-        let skillCheckScore = 0;
-        let skillCheckChoice = null;
-        let activeLesson = null;
-
-        function uid() {
-            return 'u_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
-        }
-
-        async function hashPassword(password) {
-            const data = new TextEncoder().encode('riffle:' + password);
-            const digest = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        function loadAccounts() {
-            try {
-                return JSON.parse(localStorage.getItem(STORAGE_ACCOUNTS) || '{}');
-            } catch {
-                return {};
-            }
-        }
-
-        function saveAccounts(accounts) {
-            localStorage.setItem(STORAGE_ACCOUNTS, JSON.stringify(accounts));
-        }
-
-        function getSessionId() {
-            return localStorage.getItem(STORAGE_SESSION);
-        }
-
-        function setSessionId(id) {
-            if (id) localStorage.setItem(STORAGE_SESSION, id);
-            else localStorage.removeItem(STORAGE_SESSION);
-        }
-
-        function createProfile({ displayName, email, passwordHash, isGuest }) {
-            return {
-                id: uid(),
-                displayName,
-                email: email || null,
-                passwordHash: passwordHash || null,
-                isGuest: !!isGuest,
-                skillLevel: null,
-                genres: [],
-                skillCheckDone: false,
-                preferences: {
-                    continuousAiAdaptation: true,
-                    cloudSync: false
-                },
-                practiceHistory: [],
-                learningPrompt: '',
-                roadmap: null,
-                chordBank: [],
-                library: [],
-                dayCount: 1,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString()
-            };
-        }
-
-        function persistCurrentUser() {
-            if (!currentUser) return;
-            currentUser.updatedAt = new Date().toISOString();
-            const accounts = loadAccounts();
-            accounts[currentUser.id] = currentUser;
-            saveAccounts(accounts);
-        }
-
-        function setAuthTab(tab) {
-            authTab = tab;
-            const signin = document.getElementById('auth-tab-signin');
-            const signup = document.getElementById('auth-tab-signup');
-            const nameField = document.getElementById('auth-name-field');
-            const submit = document.getElementById('auth-submit');
-            document.getElementById('auth-error').classList.add('hidden');
-
-            if (tab === 'signup') {
-                signin.className = 'px-3 py-2 text-sm font-medium text-app-muted';
-                signup.className = 'px-3 py-2 text-sm font-medium text-app-accent border-b-2 border-app-accent -mb-px';
-                nameField.classList.remove('hidden');
-                submit.textContent = 'Create profile';
-            } else {
-                signup.className = 'px-3 py-2 text-sm font-medium text-app-muted';
-                signin.className = 'px-3 py-2 text-sm font-medium text-app-accent border-b-2 border-app-accent -mb-px';
-                nameField.classList.add('hidden');
-                submit.textContent = 'Sign in';
-            }
-        }
-
-        function showAuthError(msg) {
-            const el = document.getElementById('auth-error');
-            el.textContent = msg;
-            el.classList.remove('hidden');
-        }
-
-        async function handleAuthSubmit(event) {
-            event.preventDefault();
-            const email = document.getElementById('auth-email').value.trim().toLowerCase();
-            const password = document.getElementById('auth-password').value;
-            const accounts = loadAccounts();
-            const passwordHash = await hashPassword(password);
-
-            if (authTab === 'signup') {
-                const displayName = document.getElementById('auth-name').value.trim() || email.split('@')[0];
-                if (Object.values(accounts).some(a => a.email === email)) {
-                    showAuthError('A profile with that email already exists.');
-                    return;
-                }
-                const profile = createProfile({ displayName, email, passwordHash, isGuest: false });
-                accounts[profile.id] = profile;
-                saveAccounts(accounts);
-                enterApp(profile);
-                return;
-            }
-
-            const match = Object.values(accounts).find(a => a.email === email && a.passwordHash === passwordHash);
-            if (!match) {
-                showAuthError('Email or password is incorrect.');
-                return;
-            }
-            enterApp(match);
-        }
-
-        function continueAsGuest() {
-            const profile = createProfile({
-                displayName: 'Guest Player',
-                email: null,
-                passwordHash: null,
-                isGuest: true
-            });
-            const accounts = loadAccounts();
-            accounts[profile.id] = profile;
-            saveAccounts(accounts);
-            enterApp(profile);
-        }
-
-        function enterApp(profile) {
-            currentUser = profile;
-            setSessionId(profile.id);
-            document.getElementById('auth-gate').classList.add('hidden');
-            renderAll();
-            if (!profile.skillCheckDone) openSkillCheck();
-            lucide.createIcons();
-        }
-
-        function signOut() {
-            setSessionId(null);
-            currentUser = null;
-            activeLesson = null;
-            document.getElementById('auth-gate').classList.remove('hidden');
-            document.getElementById('skill-check-modal').classList.add('hidden');
-            document.getElementById('auth-form').reset();
-            setAuthTab('signin');
-            lucide.createIcons();
-        }
-
-        function openSkillCheck() {
-            skillCheckIndex = 0;
-            skillCheckScore = 0;
-            skillCheckChoice = null;
-            document.getElementById('skill-check-modal').classList.remove('hidden');
-            renderSkillCheckStep();
-        }
-
-        function rerunSkillCheck() {
-            openSkillCheck();
-        }
-
-        function renderSkillCheckStep() {
-            const q = SKILL_QUESTIONS[skillCheckIndex];
-            const container = document.getElementById('skill-check-steps');
-            document.getElementById('skill-check-progress').textContent =
-                `Question ${skillCheckIndex + 1} of ${SKILL_QUESTIONS.length}`;
-            document.getElementById('skill-check-next').textContent =
-                skillCheckIndex === SKILL_QUESTIONS.length - 1 ? 'Finish' : 'Next';
-
-            container.innerHTML = `
-                <p class="font-medium mb-3">${q.prompt}</p>
-                <div class="space-y-2">
-                    ${q.options.map((opt, i) => `
-                        <label class="flex items-center gap-3 border border-app-border rounded-md p-3 cursor-pointer hover:border-app-accent transition-colors">
-                            <input type="radio" name="skill-q" value="${opt.score}" ${skillCheckChoice === opt.score ? 'checked' : ''} onchange="skillCheckChoice = Number(this.value)">
-                            <span class="text-sm">${opt.label}</span>
-                        </label>
-                    `).join('')}
-                </div>
-            `;
-            skillCheckChoice = null;
-        }
-
-        function advanceSkillCheck() {
-            const selected = document.querySelector('input[name="skill-q"]:checked');
-            if (!selected) return;
-            skillCheckScore += Number(selected.value);
-            skillCheckIndex += 1;
-
-            if (skillCheckIndex >= SKILL_QUESTIONS.length) {
-                let level = 'beginner';
-                if (skillCheckScore >= 5) level = 'advanced';
-                else if (skillCheckScore >= 3) level = 'intermediate';
-
-                currentUser.skillLevel = level;
-                currentUser.skillCheckDone = true;
-                if (!currentUser.genres.length) {
-                    currentUser.genres = ['acoustic-folk', 'rock-alt'];
-                }
-                rebuildLearningPrompt();
-                persistCurrentUser();
-                document.getElementById('skill-check-modal').classList.add('hidden');
-                renderAll();
-                return;
-            }
-
-            renderSkillCheckStep();
-        }
-
-        function rebuildLearningPrompt() {
-            if (!currentUser) return;
-            if (!currentUser.preferences.continuousAiAdaptation) {
-                currentUser.learningPrompt = 'Continuous AI Adaptation is off.';
-                return;
-            }
-            const genres = currentUser.genres.map(g => GENRE_LABELS[g] || g).join(', ') || 'unspecified';
-            const recent = currentUser.practiceHistory.slice(-5).map(e => `- ${e.label} (${e.at})`).join('\n') || '- No practice logged yet';
-            currentUser.learningPrompt = [
-                `You are coaching a ${currentUser.skillLevel || 'unspecified'}-level guitarist.`,
-                `Target genres: ${genres}.`,
-                `Focus on incremental drills tied to their roadmap and chord bank.`,
-                `Recent practice:`,
-                recent
-            ].join('\n');
-        }
-
-        function savePreferences() {
-            if (!currentUser) return;
-            const skill = document.querySelector('input[name="skill"]:checked');
-            currentUser.skillLevel = skill ? skill.value : currentUser.skillLevel;
-            currentUser.genres = Array.from(document.querySelectorAll('.genre-check:checked')).map(el => el.value);
-            currentUser.preferences.continuousAiAdaptation = document.getElementById('pref-ai').checked;
-            currentUser.preferences.cloudSync = document.getElementById('pref-cloud').checked;
-            rebuildLearningPrompt();
-            persistCurrentUser();
-            renderAll();
-
-            const saved = document.getElementById('prefs-saved');
-            saved.classList.remove('hidden');
-            setTimeout(() => saved.classList.add('hidden'), 1500);
-        }
-
-        function generateRoadmap() {
-            if (!currentUser) return;
-            if (!currentUser.skillLevel) {
-                alert('Set a skill level first (Preferences or skill check).');
-                switchView('profile');
-                return;
-            }
-            if (!currentUser.genres.length) {
-                alert('Pick at least one genre in Preferences.');
-                switchView('profile');
-                return;
-            }
-
-            const primary = currentUser.genres[0];
-            const titleMap = {
-                'acoustic-folk': 'Indie Folk Foundation',
-                'rock-alt': 'Rock Rhythm Builder',
-                'jazz-blues': 'Jazz & Blues Pathway',
-                'metal': 'Metal Technique Track',
-                'classical': 'Classical Fundamentals'
-            };
-            const title = titleMap[primary] || 'Custom Learning Path';
-            const skill = currentUser.skillLevel;
-
-            const phases = [
-                {
-                    id: 'p1',
-                    title: skill === 'beginner' ? 'Phase 1: Open Chord Fluency' : 'Phase 1: Extending Your Chord Vocabulary',
-                    status: 'available',
-                    lessons: [
-                        { id: 'p1l1', title: 'Core Shape Review', duration: '10 mins', type: 'chords', status: 'available' },
-                        { id: 'p1l2', title: 'Two-Chord Transitions', duration: '12 mins', type: 'chords', status: 'locked' }
-                    ]
-                },
-                {
-                    id: 'p2',
-                    title: primary === 'acoustic-folk' || primary === 'classical'
-                        ? 'Phase 2: Fingerpicking Basics'
-                        : 'Phase 2: Strumming & Groove',
-                    status: 'locked',
-                    lessons: [
-                        {
-                            id: 'p2l1',
-                            title: primary === 'acoustic-folk' || primary === 'classical' ? 'Travis Picking Pattern A' : 'Downbeat Drive Pattern',
-                            duration: '15 mins',
-                            type: primary === 'acoustic-folk' || primary === 'classical' ? 'travis' : 'strum',
-                            status: 'locked'
-                        },
-                        {
-                            id: 'p2l2',
-                            title: primary === 'acoustic-folk' || primary === 'classical' ? 'Travis Picking Pattern B' : 'Syncopated Upstrokes',
-                            duration: '15 mins',
-                            type: primary === 'acoustic-folk' || primary === 'classical' ? 'travis' : 'strum',
-                            status: 'locked'
-                        }
-                    ]
-                },
-                {
-                    id: 'p3',
-                    title: 'Phase 3: Percussive Strumming',
-                    status: 'locked',
-                    lessons: [
-                        { id: 'p3l1', title: 'Muted Body Hits', duration: '12 mins', type: 'percussive', status: 'locked' },
-                        { id: 'p3l2', title: 'Groove Over Two Chords', duration: '15 mins', type: 'percussive', status: 'locked' }
-                    ]
-                },
-                {
-                    id: 'p4',
-                    title: 'Phase 4: Capo Transposition',
-                    status: 'locked',
-                    lessons: [
-                        { id: 'p4l1', title: 'Capo Placement & Tuning Check', duration: '8 mins', type: 'capo', status: 'locked' },
-                        { id: 'p4l2', title: 'Shape-to-Key Translation', duration: '14 mins', type: 'capo', status: 'locked' }
-                    ]
-                }
-            ];
-
-            if (skill === 'advanced') {
-                phases[0].lessons[0].title = 'Color Tones & Add9 Shapes';
-                phases[0].lessons[1].title = 'ii–V–I Transitions';
-            }
-
-            currentUser.roadmap = { title, phases, generatedAt: new Date().toISOString() };
-            refreshRoadmapAvailability();
-            persistCurrentUser();
-            renderAll();
-            switchView('roadmap');
-        }
-
-        function refreshRoadmapAvailability() {
-            const roadmap = currentUser?.roadmap;
-            if (!roadmap) return;
-
-            let priorComplete = true;
-            roadmap.phases.forEach(phase => {
-                let phaseStarted = false;
-                let allDone = true;
-                phase.lessons.forEach((lesson, idx) => {
-                    if (lesson.status === 'completed') {
-                        phaseStarted = true;
-                        return;
-                    }
-                    allDone = false;
-                    if (priorComplete && idx === 0) {
-                        lesson.status = 'available';
-                        phaseStarted = true;
-                    } else if (idx > 0 && phase.lessons[idx - 1].status === 'completed') {
-                        lesson.status = 'available';
-                        phaseStarted = true;
-                    } else if (lesson.status !== 'available') {
-                        lesson.status = 'locked';
-                    }
-                });
-
-                if (allDone) phase.status = 'completed';
-                else if (phaseStarted) phase.status = 'in-progress';
-                else phase.status = priorComplete ? 'available' : 'locked';
-
-                priorComplete = allDone;
-            });
-        }
-
-        function renderRoadmap() {
-            const body = document.getElementById('roadmap-body');
-            const subtitle = document.getElementById('roadmap-subtitle');
-            const roadmap = currentUser?.roadmap;
-
-            if (!roadmap) {
-                subtitle.textContent = 'Generate a plan from your skill and genres.';
-                body.innerHTML = '<p class="text-app-muted text-sm">No roadmap yet. Set preferences, then generate one.</p>';
-                return;
-            }
-
-            subtitle.textContent = `Targeting: ${roadmap.title}`;
-            body.innerHTML = `
-                <div class="relative border-l border-app-border ml-3 space-y-8">
-                    ${roadmap.phases.map(phase => {
-                        const icon = phase.status === 'completed'
-                            ? '<i data-lucide="check-circle-2" class="w-6 h-6 text-[#10B981]"></i>'
-                            : phase.status === 'in-progress' || phase.status === 'available'
-                                ? '<i data-lucide="circle-dot" class="w-6 h-6 text-app-accent"></i>'
-                                : '<i data-lucide="circle" class="w-6 h-6 text-app-border"></i>';
-                        const badge = phase.status === 'completed'
-                            ? '<span class="text-xs text-[#10B981] font-medium border border-[#10B981] rounded px-2 py-1">Completed</span>'
-                            : phase.status === 'in-progress'
-                                ? '<span class="text-xs text-app-accent font-medium border border-app-accent rounded px-2 py-1">In Progress</span>'
-                                : phase.status === 'available'
-                                    ? '<span class="text-xs text-app-muted font-medium border border-app-border rounded px-2 py-1">Ready</span>'
-                                    : '<i data-lucide="lock" class="w-4 h-4 text-app-muted"></i>';
-                        const muted = phase.status === 'locked' ? 'opacity-50' : '';
-                        return `
-                            <div class="relative pl-8 ${muted}">
-                                <span class="absolute -left-3 top-1 bg-app-bg rounded-full">${icon}</span>
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-serif text-xl font-medium tracking-tightest ${phase.status === 'in-progress' || phase.status === 'available' ? 'text-white' : 'text-app-muted'}">${phase.title}</h3>
-                                    ${badge}
-                                </div>
-                                <div class="space-y-3">
-                                    ${phase.lessons.map(lesson => {
-                                        const clickable = lesson.status === 'available' || lesson.status === 'completed';
-                                        const iconName = lesson.status === 'locked' ? 'lock' : lesson.status === 'completed' ? 'check' : 'play';
-                                        const textClass = lesson.status === 'locked' ? 'text-app-muted' : 'font-medium';
-                                        return `
-                                            <div class="bg-[#121212] border border-app-border rounded p-4 flex items-center justify-between ${clickable ? 'group cursor-pointer hover:border-app-accent transition-colors' : ''}"
-                                                 ${clickable ? `onclick="openLesson('${phase.id}','${lesson.id}')"` : ''}>
-                                                <div class="flex items-center">
-                                                    <i data-lucide="${iconName}" class="w-4 h-4 text-app-muted ${clickable ? 'group-hover:text-app-accent' : ''} mr-3 transition-colors"></i>
-                                                    <span class="${textClass}">${lesson.title}</span>
-                                                </div>
-                                                <span class="text-xs text-app-muted">${lesson.status === 'locked' ? 'Locked' : lesson.duration}</span>
-                                            </div>
-                                        `;
-                                    }).join('')}
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
-            lucide.createIcons();
-        }
-
-        function openLesson(phaseId, lessonId) {
-            const phase = currentUser.roadmap?.phases.find(p => p.id === phaseId);
-            const lesson = phase?.lessons.find(l => l.id === lessonId);
-            if (!lesson || lesson.status === 'locked') return;
-
-            activeLesson = { phaseId, lessonId };
-            const content = LESSON_CONTENT[lesson.type] || LESSON_CONTENT.chords;
-            document.getElementById('lesson-title').textContent = lesson.title;
-            document.getElementById('lesson-meta').textContent = `${phase.title} · ${lesson.duration}`;
-            document.getElementById('lesson-steps').innerHTML = content.steps.map((step, i) => `
-                <div class="flex gap-3 bg-[#121212] border border-app-border rounded-md p-4">
-                    <span class="text-app-accent font-serif font-semibold">${i + 1}</span>
-                    <p class="text-sm">${step}</p>
-                </div>
-            `).join('');
-            switchView('lesson');
-        }
-
-        function openNextLesson() {
-            const roadmap = currentUser?.roadmap;
-            if (!roadmap) {
-                switchView('roadmap');
-                return;
-            }
-            for (const phase of roadmap.phases) {
-                for (const lesson of phase.lessons) {
-                    if (lesson.status === 'available') {
-                        openLesson(phase.id, lesson.id);
-                        return;
-                    }
-                }
-            }
-            switchView('roadmap');
-        }
-
-        function completeCurrentLesson() {
-            if (!activeLesson || !currentUser?.roadmap) return;
-            const phase = currentUser.roadmap.phases.find(p => p.id === activeLesson.phaseId);
-            const lesson = phase?.lessons.find(l => l.id === activeLesson.lessonId);
-            if (!lesson) return;
-
-            lesson.status = 'completed';
-            logPracticeEvent('lesson', lesson.title, false);
-            refreshRoadmapAvailability();
-            rebuildLearningPrompt();
-            persistCurrentUser();
-            renderAll();
-            switchView('roadmap');
-        }
-
-        function logPracticeEvent(type, label, shouldRender = true) {
-            if (!currentUser) return;
-            currentUser.practiceHistory.push({
-                type,
-                label,
-                at: new Date().toISOString()
-            });
-            rebuildLearningPrompt();
-            persistCurrentUser();
-            if (shouldRender) {
-                renderPreferences();
-                alert('Practice logged to your local profile.');
-            }
-        }
-
-        function exportProfile() {
-            if (!currentUser) return;
-            const payload = {
-                version: 1,
-                exportedAt: new Date().toISOString(),
-                profile: { ...currentUser, passwordHash: undefined }
-            };
-            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `riffle-profile-${currentUser.displayName.replace(/\s+/g, '-').toLowerCase()}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function importProfile(event) {
-            const file = event.target.files?.[0];
-            if (!file || !currentUser) return;
-            const reader = new FileReader();
-            reader.onload = () => {
-                try {
-                    const data = JSON.parse(reader.result);
-                    const incoming = data.profile || data;
-                    if (!incoming || typeof incoming !== 'object') throw new Error('Invalid file');
-
-                    currentUser.displayName = incoming.displayName || currentUser.displayName;
-                    currentUser.skillLevel = incoming.skillLevel || currentUser.skillLevel;
-                    currentUser.genres = incoming.genres || currentUser.genres;
-                    currentUser.skillCheckDone = incoming.skillCheckDone ?? currentUser.skillCheckDone;
-                    currentUser.preferences = { ...currentUser.preferences, ...(incoming.preferences || {}) };
-                    currentUser.practiceHistory = incoming.practiceHistory || currentUser.practiceHistory;
-                    currentUser.roadmap = incoming.roadmap || currentUser.roadmap;
-                    currentUser.chordBank = incoming.chordBank || currentUser.chordBank;
-                    currentUser.library = incoming.library || currentUser.library;
-                    currentUser.dayCount = incoming.dayCount || currentUser.dayCount;
-                    rebuildLearningPrompt();
-                    persistCurrentUser();
-                    renderAll();
-                    alert('Profile imported into this local account.');
-                } catch {
-                    alert('Could not import that JSON file.');
-                }
-                event.target.value = '';
-            };
-            reader.readAsText(file);
-        }
-
-        function renderSidebar() {
-            document.getElementById('sidebar-name').textContent = currentUser.displayName;
-            document.getElementById('sidebar-plan').textContent = currentUser.isGuest ? 'Guest (local)' : 'Local profile';
-        }
-
-        function renderDashboard() {
-            document.getElementById('dashboard-welcome').textContent =
-                `Welcome back, ${currentUser.displayName}. You are on Day ${currentUser.dayCount} of your learning plan.`;
-
-            document.getElementById('stat-skill').textContent =
-                currentUser.skillLevel ? currentUser.skillLevel[0].toUpperCase() + currentUser.skillLevel.slice(1) : 'Not set';
-            document.getElementById('stat-genres').textContent =
-                currentUser.genres.length
-                    ? currentUser.genres.map(g => GENRE_LABELS[g] || g).join(', ')
-                    : 'Not set';
-            document.getElementById('stat-chords').textContent = String(currentUser.chordBank.length);
-
-            const scans = document.getElementById('recent-scans');
-            if (currentUser.library.length) {
-                scans.innerHTML = currentUser.library.slice(-3).reverse().map(item => `
-                    <li class="flex items-center text-sm">
-                        <i data-lucide="file-text" class="w-4 h-4 text-app-muted mr-3"></i>
-                        <span class="truncate flex-1">${item.name || item}</span>
-                    </li>
-                `).join('');
-            } else {
-                scans.innerHTML = '<li class="text-sm text-app-muted">No scans yet — Partner A owns the library track.</li>';
-            }
-
-            const nextTitle = document.getElementById('dashboard-next-title');
-            const nextSub = document.getElementById('dashboard-next-sub');
-            const nextBtnLabel = document.getElementById('dashboard-next-btn-label');
-            let found = null;
-            if (currentUser.roadmap) {
-                for (const phase of currentUser.roadmap.phases) {
-                    for (const lesson of phase.lessons) {
-                        if (lesson.status === 'available') { found = { phase, lesson }; break; }
-                    }
-                    if (found) break;
-                }
-            }
-            if (found) {
-                nextTitle.textContent = found.lesson.title;
-                nextSub.textContent = `Current Goal: Master '${currentUser.roadmap.title}' (${found.lesson.duration})`;
-                nextBtnLabel.textContent = 'Resume Practice';
-            } else if (currentUser.roadmap) {
-                nextTitle.textContent = 'Roadmap complete';
-                nextSub.textContent = currentUser.roadmap.title;
-                nextBtnLabel.textContent = 'View Roadmap';
-            } else {
-                nextTitle.textContent = 'Generate a roadmap';
-                nextSub.textContent = 'Set your skill and genres, then build a plan.';
-                nextBtnLabel.textContent = 'Open Roadmap';
-            }
-        }
-
-        function renderPreferences() {
-            document.querySelectorAll('input[name="skill"]').forEach(input => {
-                input.checked = input.value === currentUser.skillLevel;
-            });
-            document.querySelectorAll('.genre-check').forEach(input => {
-                input.checked = currentUser.genres.includes(input.value);
-            });
-            document.getElementById('pref-ai').checked = !!currentUser.preferences.continuousAiAdaptation;
-            document.getElementById('pref-cloud').checked = !!currentUser.preferences.cloudSync;
-            document.getElementById('cloud-tools').classList.toggle('hidden', !currentUser.preferences.cloudSync);
-            document.getElementById('learning-prompt').textContent =
-                currentUser.learningPrompt || 'Save preferences to generate a prompt.';
-        }
-
-        function renderLibrary() {
-            const list = document.getElementById('library-list');
-            if (!currentUser.library.length) {
-                list.innerHTML = '<li class="p-4 text-sm text-app-muted">Empty — waiting on Partner A library work.</li>';
-                document.getElementById('library-detail-title').textContent = 'No file selected';
-                return;
-            }
-            list.innerHTML = currentUser.library.map((item, idx) => `
-                <li class="p-4 hover:bg-[#1A1A1A] cursor-pointer flex items-center justify-between transition-colors" onclick="document.getElementById('library-detail-title').textContent='${(item.name || item).replace(/'/g, "\\'")}'">
-                    <div class="flex items-center">
-                        <i data-lucide="file-text" class="w-5 h-5 text-app-muted mr-3"></i>
-                        <span class="font-medium text-sm">${item.name || item}</span>
-                    </div>
-                </li>
-            `).join('');
-        }
-
-        function renderAll() {
-            if (!currentUser) return;
-            renderSidebar();
-            renderDashboard();
-            renderPreferences();
-            renderRoadmap();
-            renderLibrary();
-            lucide.createIcons();
-        }
-
-        function switchView(viewId) {
-            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
-            const targetView = document.getElementById(viewId);
-            if (targetView) targetView.classList.remove('hidden');
-
-            document.querySelectorAll('.nav-link').forEach(el => {
-                el.classList.remove('text-app-accent', 'bg-[#2A2A2A]');
-                el.classList.add('text-app-muted', 'hover:text-app-text', 'hover:bg-[#2A2A2A]');
-            });
-
-            const navId = viewId === 'lesson' ? 'roadmap' : viewId;
-            const activeNav = document.getElementById('nav-' + navId);
-            if (activeNav) {
-                activeNav.classList.remove('text-app-muted', 'hover:text-app-text', 'hover:bg-[#2A2A2A]');
-                activeNav.classList.add('text-app-accent', 'bg-[#2A2A2A]');
-            }
-            lucide.createIcons();
-        }
-
-        document.getElementById('pref-cloud').addEventListener('change', () => {
-            document.getElementById('cloud-tools').classList.toggle('hidden', !document.getElementById('pref-cloud').checked);
-        });
-
-        function boot() {
-            lucide.createIcons();
-            const sessionId = getSessionId();
-            const accounts = loadAccounts();
-            if (sessionId && accounts[sessionId]) {
-                enterApp(accounts[sessionId]);
-            } else {
-                document.getElementById('auth-gate').classList.remove('hidden');
-                setAuthTab('signin');
-            }
-        }
-
-        boot();
-    </script>
+    <script type="module" src="./src/app.js"></script>
 </body>
 </html>

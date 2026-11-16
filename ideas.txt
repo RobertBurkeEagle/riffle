@@ -23,3 +23,6 @@ Microphone integration                      → specs/004-mic-interactive-practi
     1. Listens if user plays correct chord
     2. Interactive play along
     3. Guitar Hero with real Guitar         → product name: "Challenge Lane"
+
+Later:
+Fretboard diagrams for each saved chord     → after specs/002-library-chord-bank (Partner B #14)
