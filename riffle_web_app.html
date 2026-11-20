@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riffle - Professional Guitar Learning</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,18 +11,19 @@
                 extend: {
                     colors: {
                         app: {
-                            bg: '#121212',
-                            card: '#1E1E1E',
-                            border: '#333333',
-                            accent: '#FF4500',
-                            accentHover: '#E03D00',
-                            text: '#E5E7EB',
-                            muted: '#9CA3AF'
+                            bg: '#F0F4F8',
+                            card: '#FFFFFF',
+                            border: '#D5DDE6',
+                            accent: '#0E7490',
+                            accentHover: '#0F766E',
+                            text: '#0B1F33',
+                            muted: '#5C6570'
                         }
                     },
                     fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
+                        serif: ['"Gemunu Libre"', 'sans-serif'],
+                        sans: ['"Sofia Sans Condensed"', 'Segoe UI', 'sans-serif'],
+                        display: ['"Gemunu Libre"', 'sans-serif'],
                     },
                     letterSpacing: {
                         tightest: '-0.5px',
@@ -36,19 +32,18 @@
             }
         }
     </script>
-    
     <script src="https://unpkg.com/lucide@latest"></script>
-
+    <link rel="stylesheet" href="css/corridor.css">
     <style>
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #121212; }
-        ::-webkit-scrollbar-thumb { background: #333333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4B5563; }
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        .bg-\[\#121212\], .bg-\[\#2A2A2A\] { background-color: #EEF3F7 !important; }
+        .hover\:bg-\[\#2A2A2A\]:hover { background-color: #E8EEF3 !important; }
+        .peer-checked\:bg-\[\#2A1610\]:checked + div,
+        .peer-checked\:bg-\[\#2A1610\] { background-color: #E0F4FA !important; }
     </style>
 </head>
-<body class="bg-app-bg text-app-text font-sans h-screen flex overflow-hidden selection:bg-app-accent selection:text-white">
+<body class="corridor-shell bg-app-bg text-app-text font-sans h-screen flex overflow-hidden">
 
     <!-- Auth Gate -->
     <div id="auth-gate" class="fixed inset-0 z-50 bg-app-bg flex items-center justify-center p-6 hidden">
@@ -104,36 +99,29 @@
     </div>
 
     <!-- App Shell -->
-    <div id="app-shell" class="contents">
-    <aside class="w-64 bg-app-card border-r border-app-border flex flex-col flex-shrink-0">
+    <div id="app-shell" class="corridor-fluid">
+    <aside id="shell-rail" class="shell-rail hidden">
         <div class="h-16 flex items-center px-6 border-b border-app-border">
             <i data-lucide="guitar" class="text-app-accent w-6 h-6 mr-3"></i>
-            <h1 class="font-serif font-bold text-xl tracking-tightest">Riffle</h1>
+            <h1 class="font-display font-bold text-xl">Riffle</h1>
         </div>
-        
         <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
-            <button id="nav-dashboard" onclick="switchView('dashboard')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-accent bg-[#2A2A2A]">
-                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i>
-                Overview
+            <button id="nav-dashboard" onclick="switchView('dashboard')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-app-accent bg-[#E0F4FA]">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i>Overview
             </button>
-            <button id="nav-profile" onclick="switchView('profile')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-muted hover:text-app-text hover:bg-[#2A2A2A]">
-                <i data-lucide="user-cog" class="w-5 h-5 mr-3"></i>
-                App Preferences
+            <button id="nav-profile" onclick="switchView('profile')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-app-muted hover:text-app-text hover:bg-[#E8EEF3]">
+                <i data-lucide="user-cog" class="w-5 h-5 mr-3"></i>Preferences
             </button>
-            <button id="nav-roadmap" onclick="switchView('roadmap')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-muted hover:text-app-text hover:bg-[#2A2A2A]">
-                <i data-lucide="map" class="w-5 h-5 mr-3"></i>
-                Active Learning Roadmap
+            <button id="nav-roadmap" onclick="switchView('roadmap')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-app-muted hover:text-app-text hover:bg-[#E8EEF3]">
+                <i data-lucide="map" class="w-5 h-5 mr-3"></i>Roadmap
             </button>
-            <button id="nav-library" onclick="switchView('library')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-muted hover:text-app-text hover:bg-[#2A2A2A]">
-                <i data-lucide="library" class="w-5 h-5 mr-3"></i>
-                Sheet Music Library
+            <button id="nav-library" onclick="switchView('library')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-app-muted hover:text-app-text hover:bg-[#E8EEF3]">
+                <i data-lucide="library" class="w-5 h-5 mr-3"></i>Library
             </button>
-            <button id="nav-practice" onclick="switchView('practice')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors text-app-muted hover:text-app-text hover:bg-[#2A2A2A]">
-                <i data-lucide="music" class="w-5 h-5 mr-3"></i>
-                Practice Room
+            <button id="nav-practice" onclick="switchView('practice')" class="nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-app-muted hover:text-app-text hover:bg-[#E8EEF3]">
+                <i data-lucide="music" class="w-5 h-5 mr-3"></i>Practice Room
             </button>
         </nav>
-
         <div class="p-4 border-t border-app-border">
             <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center min-w-0">
@@ -145,97 +133,112 @@
                         <p id="sidebar-plan" class="text-xs text-app-muted truncate">Local profile</p>
                     </div>
                 </div>
-                <button onclick="signOut()" title="Sign out" class="text-app-muted hover:text-app-text p-1.5 rounded hover:bg-[#2A2A2A]">
+                <button onclick="signOut()" type="button" aria-label="Sign out" class="text-app-muted hover:text-app-text p-2 rounded hover:bg-[#E8EEF3]">
                     <i data-lucide="log-out" class="w-4 h-4"></i>
                 </button>
             </div>
         </div>
     </aside>
 
-    <main class="flex-1 overflow-y-auto p-8 relative">
+    <main class="flex-1 overflow-y-auto relative">
         
-        <!-- Dashboard -->
-        <section id="dashboard" class="view-section max-w-5xl mx-auto">
-            <header class="mb-8">
-                <h2 class="font-serif text-3xl font-semibold tracking-tightest">Overview</h2>
-                <p id="dashboard-welcome" class="text-app-muted mt-2">Welcome back.</p>
-            </header>
+        <!-- Dashboard / first viewport -->
+        <section id="dashboard" class="view-section corridor-overview" aria-label="Overview">
+            <div class="r-abs r-nav-rail" aria-hidden="true"></div>
+            <div class="r-abs r-brand"><i data-lucide="guitar" class="text-app-accent w-7 h-7"></i> RIFFLE</div>
+            <nav class="r-abs r-nav-links" aria-label="Primary">
+                <button type="button" onclick="switchView('dashboard')" class="nav-link is-active" id="dash-nav-dashboard"><i data-lucide="layout-dashboard" class="w-4 h-4"></i>Overview</button>
+                <button type="button" onclick="switchView('profile')" class="nav-link" id="dash-nav-profile"><i data-lucide="user-cog" class="w-4 h-4"></i>Preferences</button>
+                <button type="button" onclick="switchView('roadmap')" class="nav-link" id="dash-nav-roadmap"><i data-lucide="map" class="w-4 h-4"></i>Roadmap</button>
+                <button type="button" onclick="switchView('library')" class="nav-link" id="dash-nav-library"><i data-lucide="library" class="w-4 h-4"></i>Library</button>
+                <button type="button" onclick="switchView('practice')" class="nav-link" id="dash-nav-practice"><i data-lucide="music" class="w-4 h-4"></i>Practice</button>
+            </nav>
+            <div class="r-abs r-status-block">
+                <p><span class="ok">● Continuity on</span></p>
+                <p id="dashboard-welcome" class="normal-case tracking-normal font-medium mt-2" style="text-transform:none;letter-spacing:0;font-size:12px;color:var(--ink)">Welcome back.</p>
+                <p class="mt-3" id="local-clock">LOCAL SESSION</p>
+            </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-app-card border border-app-border rounded-lg p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                        <div>
-                            <div class="flex items-center text-app-accent mb-2">
-                                <i data-lucide="play-circle" class="w-5 h-5 mr-2"></i>
-                                <span class="text-sm font-semibold uppercase tracking-wider">Up Next</span>
-                            </div>
-                            <h3 id="dashboard-next-title" class="font-serif text-xl font-semibold tracking-tightest mb-1">Generate a roadmap</h3>
-                            <p id="dashboard-next-sub" class="text-app-muted text-sm">Set your skill and genres, then build a plan.</p>
-                        </div>
-                        <button id="dashboard-next-btn" onclick="openNextLesson()" class="mt-4 sm:mt-0 bg-app-accent hover:bg-app-accentHover text-white px-6 py-2.5 rounded-md font-medium transition-colors flex items-center">
-                            <span id="dashboard-next-btn-label">Resume Practice</span>
-                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                        </button>
-                    </div>
+            <h2 class="r-abs r-hero-headline">Practice continues here</h2>
+            <p class="r-abs r-hero-sub">Skill-aware roadmaps and song-derived drills so you always know the next station.</p>
+            <div class="r-abs r-hero-ctas">
+                <button id="dashboard-next-btn" type="button" onclick="openNextLesson()" class="btn-primary">
+                    <span id="dashboard-next-btn-label">Resume Practice</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+                <button type="button" onclick="switchView('roadmap')" class="btn-secondary">View Roadmap</button>
+            </div>
+            <div class="r-abs r-popular-list">
+                <div class="uppercase tracking-wider text-app-muted mb-1">Upcoming stations</div>
+                <ul>
+                    <li><span id="dashboard-next-title">Generate a roadmap</span><span>→</span></li>
+                    <li><button type="button" onclick="openPractice('strum')" class="text-left">Strumming drill</button><span>10 min</span></li>
+                    <li><button type="button" onclick="openPractice('chord')" class="text-left">Chord transitions</button><span>10 min</span></li>
+                </ul>
+                <p id="dashboard-next-sub" class="text-app-muted font-medium mt-2" style="font-size:12px;text-transform:none;letter-spacing:0;font-weight:500">Set your skill and genres, then build a plan.</p>
+            </div>
 
-                    <div>
-                        <h3 class="font-serif text-xl font-semibold tracking-tightest mb-4">Daily Recommended Exercises</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="bg-app-card border border-app-border rounded-lg p-5">
-                                <h4 class="font-medium mb-1">Strumming drill</h4>
-                                <p class="text-sm text-app-muted mb-4">Difficulty defaults to your skill level.</p>
-                                <button onclick="openPractice('strum')" class="text-app-accent hover:text-white text-sm font-medium flex items-center transition-colors">
-                                    Start Drill <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
-                                </button>
-                            </div>
-                            <div class="bg-app-card border border-app-border rounded-lg p-5">
-                                <h4 class="font-medium mb-1">Chord transitions</h4>
-                                <p class="text-sm text-app-muted mb-4">Transpose and log to keep continuity.</p>
-                                <button onclick="openPractice('chord')" class="text-app-accent hover:text-white text-sm font-medium flex items-center transition-colors">
-                                    Start Drill <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-app-card border border-app-border rounded-lg p-6">
-                        <h3 class="font-serif text-lg font-semibold tracking-tightest mb-4 border-b border-app-border pb-2">Recent activity</h3>
-                        <ul id="recent-activity" class="space-y-3">
-                            <li class="text-sm text-app-muted">No practice logged yet. Complete a lesson or drill to see it here.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="bg-app-card border border-app-border rounded-lg p-6">
-                        <h3 class="font-serif text-lg font-semibold tracking-tightest mb-4 border-b border-app-border pb-2">Progress Statistics</h3>
-                        <ul class="space-y-4">
-                            <li>
-                                <span class="block text-xs text-app-muted uppercase tracking-wider mb-1">Skill Level</span>
-                                <span id="stat-skill" class="font-medium">—</span>
-                            </li>
-                            <li>
-                                <span class="block text-xs text-app-muted uppercase tracking-wider mb-1">Active Genres</span>
-                                <span id="stat-genres" class="font-medium">—</span>
-                            </li>
-                            <li>
-                                <span class="block text-xs text-app-muted uppercase tracking-wider mb-1">Chords Learned</span>
-                                <span id="stat-chords" class="font-medium text-2xl font-serif">0</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-app-card border border-app-border rounded-lg p-6">
-                        <div class="flex items-center justify-between mb-4 border-b border-app-border pb-2">
-                            <h3 class="font-serif text-lg font-semibold tracking-tightest">Recent Scans</h3>
-                            <button onclick="switchView('library')" class="text-app-muted hover:text-app-accent"><i data-lucide="plus" class="w-5 h-5"></i></button>
-                        </div>
-                        <ul id="recent-scans" class="space-y-3">
-                            <li class="text-sm text-app-muted">No scans yet — library uploads land in spec 002.</li>
-                        </ul>
-                    </div>
+            <div class="r-abs r-corridor-map" aria-label="Learning corridor">
+                <svg viewBox="0 0 640 432" role="img" aria-labelledby="corridor-title">
+                    <title id="corridor-title">Acoustic Pop learning corridor</title>
+                    <rect width="640" height="432" fill="#F7FAFC"/>
+                    <g stroke-width="8" fill="none" stroke-linecap="round">
+                        <path d="M80 80 H560" stroke="#0E7490"/>
+                        <path d="M80 200 H560" stroke="#15803D"/>
+                        <path d="M80 320 H400" stroke="#CA8A04"/>
+                        <path d="M320 80 V320" stroke="#DC2626"/>
+                    </g>
+                    <g font-family="Sofia Sans Condensed,sans-serif" font-size="14" font-weight="700" fill="#0B1F33">
+                        <circle cx="80" cy="80" r="10" fill="#0E7490"/><text x="80" y="58" text-anchor="middle">Foundations</text>
+                        <circle cx="240" cy="80" r="10" fill="#0E7490"/><text x="240" y="58" text-anchor="middle">Chord Shapes</text>
+                        <circle cx="400" cy="80" r="12" fill="#fff" stroke="#0E7490" stroke-width="4"/><text x="400" y="58" text-anchor="middle">Picking</text>
+                        <circle cx="560" cy="80" r="10" fill="#D5DDE6"/><text x="560" y="58" text-anchor="middle">Songs</text>
+                        <circle cx="80" cy="200" r="10" fill="#15803D"/><text x="80" y="230" text-anchor="middle">Strum</text>
+                        <circle cx="320" cy="200" r="10" fill="#15803D"/><text x="320" y="230" text-anchor="middle">Central</text>
+                        <circle cx="560" cy="200" r="10" fill="#D5DDE6"/><text x="560" y="230" text-anchor="middle">Transitions</text>
+                        <circle cx="80" cy="320" r="10" fill="#CA8A04"/><text x="80" y="350" text-anchor="middle">Warmups</text>
+                        <circle cx="320" cy="320" r="10" fill="#CA8A04"/><text x="320" y="350" text-anchor="middle">Groove</text>
+                        <text x="320" y="400" text-anchor="middle" fill="#0E7490">Acoustic Pop line · next: Alternate Picking Mastery</text>
+                    </g>
+                </svg>
+            </div>
+            <div class="r-abs r-map-callout">
+                <div class="callout">
+                    <strong id="map-callout-title">Next station: Alternate Picking Mastery</strong>
+                    <button type="button" onclick="openNextLesson()" class="btn-primary" style="padding:0.45rem 0.8rem;font-size:0.85rem">Resume Practice</button>
                 </div>
             </div>
+
+            <div class="r-abs r-panel-upnext"><div class="panel">
+                <h3>Up next</h3>
+                <ul id="recent-activity" class="space-y-2 text-sm">
+                    <li class="text-app-muted">No practice logged yet.</li>
+                </ul>
+            </div></div>
+            <div class="r-abs r-panel-alerts"><div class="panel">
+                <h3>Practice notes</h3>
+                <p class="text-sm mb-2"><span class="line-dot" style="background:#DC2626"></span>Keep sessions short and continuous.</p>
+                <p class="text-sm"><span class="line-dot" style="background:#CA8A04"></span>Mic play-along is optional later.</p>
+            </div></div>
+            <div class="r-abs r-panel-progress"><div class="panel">
+                <h3>Progress</h3>
+                <p class="text-xs text-app-muted uppercase mb-1">Skill</p>
+                <p id="stat-skill" class="font-bold mb-3">—</p>
+                <p class="text-xs text-app-muted uppercase mb-1">Genres</p>
+                <p id="stat-genres" class="font-bold mb-3 text-sm">—</p>
+                <p class="text-xs text-app-muted uppercase mb-1">Chords</p>
+                <p id="stat-chords" class="font-display text-3xl font-bold">0</p>
+            </div></div>
+            <div class="r-abs r-panel-profile"><div class="panel">
+                <h3>Library</h3>
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-bold">Recent scans</span>
+                    <button type="button" onclick="switchView('library')" aria-label="Open library" class="text-app-accent p-1"><i data-lucide="plus" class="w-4 h-4"></i></button>
+                </div>
+                <ul id="recent-scans" class="space-y-2 text-sm">
+                    <li class="text-app-muted">No scans yet — library uploads land in spec 002.</li>
+                </ul>
+            </div></div>
         </section>
 
         <!-- Preferences -->

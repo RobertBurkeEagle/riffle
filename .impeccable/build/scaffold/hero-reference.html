@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Scaffold reference: challenger-transit.png</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700&display=swap">
+  <link rel="stylesheet" href="layout.css">
+  <style>html,body{margin:0}body{background:#f7f7f8}.region{box-sizing:border-box}.region.text p{white-space:pre-wrap}</style>
+</head>
+<body>
+<!-- Reference only. Every region sits at its measured box inside a comp-aspect frame. Take the boxes (layout.css), keep your own semantic structure. -->
+<main class="comp-frame" style="max-width:1280px">
+  <div class="r-nav-rail region chrome" data-region="nav-rail"><!-- Left navigation rail with brand and nav links --></div>
+  <div class="r-brand region text" data-region="brand"><!-- Riffle wordmark --><p style="font-size:var(--r-brand-font);line-height:1.05;margin:0">brand</p></div>
+  <div class="r-nav-links region control" data-region="nav-links"><!-- Overview Preferences Roadmap Library Practice buttons: match the control's lettering and visible shape to the crop (comp-spec.mjs --crop nav-links); a control need not have button chrome --></div>
+  <div class="r-status-block region text" data-region="status-block"><!-- Practice continuity status and local session time --><p style="font-size:var(--r-status-block-font);line-height:1.05;margin:0">status-block</p></div>
+  <div class="r-hero-headline region text" data-region="hero-headline"><!-- Primary Overview headline --><p style="font-size:var(--r-hero-headline-font);font-family:var(--r-hero-headline-family),sans-serif;font-weight:var(--r-hero-headline-weight);line-height:1.05;margin:0">hero-headline</p></div>
+  <div class="r-hero-sub region text" data-region="hero-sub"><!-- Supporting sentence about continuous practice --><p style="font-size:var(--r-hero-sub-font);line-height:1.05;margin:0">hero-sub</p></div>
+  <div class="r-hero-ctas region control" data-region="hero-ctas"><!-- Resume Practice and View Roadmap buttons: match the control's lettering and visible shape to the crop (comp-spec.mjs --crop hero-ctas); a control need not have button chrome --></div>
+  <div class="r-popular-list region text" data-region="popular-list"><!-- Upcoming lessons list with durations --><p style="font-size:var(--r-popular-list-font);line-height:1.05;margin:0">popular-list</p></div>
+  <div class="r-corridor-map region chrome" data-region="corridor-map"><!-- Learning corridor as live SVG chart from roadmap stations --></div>
+  <div class="r-map-callout region control" data-region="map-callout"><!-- Next station callout with Resume Practice: match the control's lettering and visible shape to the crop (comp-spec.mjs --crop map-callout); a control need not have button chrome --></div>
+  <div class="r-panel-upnext region chrome" data-region="panel-upnext"><!-- Up next / upcoming drills panel --></div>
+  <div class="r-panel-alerts region chrome" data-region="panel-alerts"><!-- Practice notes and roadmap status panel --></div>
+  <div class="r-panel-progress region chrome" data-region="panel-progress"><!-- Progress stats panel --></div>
+  <div class="r-panel-profile region chrome" data-region="panel-profile"><!-- Profile / skill summary panel --></div>
+</main>
+</body>
+</html>

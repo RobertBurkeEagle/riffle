@@ -1,0 +1,42 @@
+{
+  "title": "Approve the Overview composition",
+  "question": "Bright Corridor Map is locked. Which composition should the build match?",
+  "options": [
+    {
+      "id": "comp-1",
+      "label": "Map-led Overview (decision)",
+      "kicker": "OPTION 1",
+      "thesis": "Large corridor map beside overview copy; left rail shell.",
+      "palette": ["#F0F4F8", "#0B1F33", "#0E7490", "#CA8A04", "#15803D"],
+      "materials": ["porcelain panels", "route inks", "wayfinding sans"],
+      "viewport": "Left rail + large map work area with Resume on next station.",
+      "risk": "Decision render drifted toward transit marketing; use only if we treat it as spatial reference and rebuild Riffle content faithfully.",
+      "comp": ".impeccable/mocks/decision/challenger-transit.png"
+    },
+    {
+      "id": "comp-2",
+      "label": "Top bar + corridor stage",
+      "kicker": "OPTION 2",
+      "thesis": "Top navigation; the roadmap corridor owns the main stage.",
+      "palette": ["#F0F4F8", "#0B1F33", "#0E7490", "#CA8A04", "#15803D"],
+      "materials": ["porcelain panels", "route inks", "wayfinding sans"],
+      "viewport": "Top tabs; Acoustic Pop line stations lead; Resume on Alternate Picking Mastery; stats aside.",
+      "risk": "Map-as-hero can crowd secondary progress if density is too low.",
+      "comp": ".impeccable/mocks/comp-2-topbar-corridor.png"
+    },
+    {
+      "id": "comp-3",
+      "label": "Rail + Up Next + compact corridor",
+      "kicker": "OPTION 3",
+      "thesis": "Task-first: Up Next strip leads; compact corridor proves the signature move.",
+      "palette": ["#F0F4F8", "#0B1F33", "#0E7490", "#CA8A04", "#15803D"],
+      "materials": ["porcelain panels", "route inks", "wayfinding sans"],
+      "viewport": "Left rail; Resume strip first; horizontal station map; stats and recent scans.",
+      "risk": "Compact map must stay legible or the signature move disappears.",
+      "comp": ".impeccable/mocks/comp-3-rail-upnext.png"
+    }
+  ],
+  "buildPath": { "value": "comp", "toggle": false },
+  "steer": false,
+  "canon": false
+}

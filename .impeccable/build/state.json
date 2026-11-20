@@ -1,0 +1,277 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-11-20T00:22:45.934Z",
+  "comp": ".impeccable\\mocks\\decision\\challenger-transit.png",
+  "direction": "04061e4a",
+  "breakpoint": "1280x720",
+  "artifact": "riffle_web_app.html",
+  "phase": "hero",
+  "phases": {
+    "comps": {
+      "status": "closed",
+      "openedAt": "2026-11-20T00:22:45.934Z",
+      "closedAt": "2026-11-20T15:56:37.614Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "4 comps, 1 approved",
+        "approved": ".impeccable\\mocks\\decision\\challenger-transit.png",
+        "at": "2026-11-20T15:56:37.614Z"
+      },
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-11-20T15:56:37.619Z",
+      "closedAt": "2026-11-20T15:58:38.975Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "14 regions, 0 plates, 5 text regions measured",
+        "at": "2026-11-20T15:58:38.974Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "closed",
+      "openedAt": "2026-11-20T15:58:38.975Z",
+      "closedAt": "2026-11-20T16:01:16.356Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no plates owed",
+        "at": "2026-11-20T16:01:16.353Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "open",
+      "openedAt": "2026-11-20T16:01:16.356Z",
+      "closedAt": null,
+      "attempts": 1,
+      "notes": [
+        {
+          "at": "2026-11-20T16:04:25.139Z",
+          "text": "Stated rewrite: approved comp drifted to transit marketing; surface brief requires Riffle product content with spatial layout as law."
+        }
+      ],
+      "gate": {
+        "ok": false,
+        "reasons": [
+          "hero overall 61.0% < 72% (structure 56%, color 94%, detail 41%)",
+          "region status-block is missing (detail 7%, structure 75%): the comp shows material the build does not",
+          "region map-callout (control) is contradicted (structure 38%, detail added 23%): this control differs from the comp: inspect its lettering and visible shape separately against the crop and the measured readings; preserve the region's control classification",
+          "control hero-ctas drifts to 62% (structure 66%, color 79%): open .impeccable/review/diff/hero/regions/hero-ctas.png and compare its lettering and visible shape separately; use the measured readings and preserve the region's control classification",
+          "region hero-ctas: its ink sits in a 323x39px box in the comp and 263x47px in the build (padding, row height, or size); match the box, not only the position",
+          "artifact draws an illustration in inline SVG: <svg viewBox=\"0 0 640 432\" role=\"img\" aria-labelledby=\"corridor-title\"...> (14 shapes, 47 chars of path data, 640px). Drawings, diagrams, notation, and leader lines are plates or belong to the plate they annotate; only icon-sized SVG (under 64px, a few paths) is code",
+          "text hero-headline: cap height 32px in the build, 44.6px in the comp (-28%); set font-size so the cap height renders at 44.6px (font-match ranked Gemunu Libre 700 at 71px)",
+          "text hero-ctas: letter-spacing is tighter than the comp's (gap 0.022 vs 0.077 of the cap height); set letter-spacing to open it by about 2px",
+          "text status-block: ink is #349ed3 in the build, #939698 in the comp; use the comp's colour",
+          "text hero-ctas: ink is #0875c8 in the build, #09a8eb in the comp; use the comp's colour",
+          "text popular-list: ink is #5ca1dc in the build, #b8bbbf in the comp; use the comp's colour",
+          "the build carries ink in 4 grid cells where the comp is calm (J1, H5, H6, A9); nothing exists on the page that the comp does not show (a kicker, an extra nav item, a divider, a second row of controls); remove it or name it in a stated decision after the hero passes"
+        ],
+        "regionReasons": {
+          "status-block": [
+            "region status-block is missing (detail 7%, structure 75%): the comp shows material the build does not",
+            "text status-block: ink is #349ed3 in the build, #939698 in the comp; use the comp's colour"
+          ],
+          "map-callout": [
+            "region map-callout (control) is contradicted (structure 38%, detail added 23%): this control differs from the comp: inspect its lettering and visible shape separately against the crop and the measured readings; preserve the region's control classification"
+          ],
+          "hero-ctas": [
+            "control hero-ctas drifts to 62% (structure 66%, color 79%): open .impeccable/review/diff/hero/regions/hero-ctas.png and compare its lettering and visible shape separately; use the measured readings and preserve the region's control classification",
+            "region hero-ctas: its ink sits in a 323x39px box in the comp and 263x47px in the build (padding, row height, or size); match the box, not only the position",
+            "text hero-ctas: letter-spacing is tighter than the comp's (gap 0.022 vs 0.077 of the cap height); set letter-spacing to open it by about 2px",
+            "text hero-ctas: ink is #0875c8 in the build, #09a8eb in the comp; use the comp's colour"
+          ],
+          "hero-headline": [
+            "text hero-headline: cap height 32px in the build, 44.6px in the comp (-28%); set font-size so the cap height renders at 44.6px (font-match ranked Gemunu Libre 700 at 71px)"
+          ],
+          "popular-list": [
+            "text popular-list: ink is #5ca1dc in the build, #b8bbbf in the comp; use the comp's colour"
+          ]
+        },
+        "summary": "hero 61% (drift)",
+        "score": 0.6101,
+        "verdict": "drift",
+        "report": ".impeccable/review/diff/hero/report.json",
+        "sideBySide": "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/hero/side-by-side.png",
+        "worst": [
+          "map-callout contradicted 50%",
+          "hero-headline drift 51%",
+          "hero-ctas drift 62%"
+        ],
+        "worstIds": [
+          "map-callout",
+          "hero-headline",
+          "hero-ctas"
+        ],
+        "worstCrops": [
+          {
+            "id": "map-callout",
+            "verdict": "contradicted",
+            "score": {
+              "overall": 0.5047,
+              "structure": 0.3815,
+              "color": 0.8381,
+              "colorIntersection": 0.7789,
+              "paletteMatch": 0.87,
+              "detail": 0.1987,
+              "detailRaw": 0.3132,
+              "detailAdded": 0.2292,
+              "bands": 0.6533
+            },
+            "file": ".impeccable/review/diff/hero/regions/map-callout.png"
+          },
+          {
+            "id": "hero-headline",
+            "verdict": "drift",
+            "score": {
+              "overall": 0.5061,
+              "structure": 0.3392,
+              "color": 0.8277,
+              "colorIntersection": 0.7312,
+              "paletteMatch": 0.8796,
+              "detail": 0.3804,
+              "detailRaw": 0.4689,
+              "detailAdded": 0.1771,
+              "bands": 0.725
+            },
+            "file": ".impeccable/review/diff/hero/regions/hero-headline.png"
+          },
+          {
+            "id": "hero-ctas",
+            "verdict": "drift",
+            "score": {
+              "overall": 0.6156,
+              "structure": 0.6613,
+              "color": 0.7918,
+              "colorIntersection": 0.7242,
+              "paletteMatch": 0.8281,
+              "detail": 0.2044,
+              "detailRaw": 0.2981,
+              "detailAdded": 0.1875,
+              "bands": 0
+            },
+            "file": ".impeccable/review/diff/hero/regions/hero-ctas.png"
+          }
+        ],
+        "regionVerdicts": {
+          "nav-rail": "drift",
+          "brand": "drift",
+          "nav-links": "drift",
+          "status-block": "missing",
+          "hero-headline": "drift",
+          "hero-sub": "drift",
+          "hero-ctas": "drift",
+          "popular-list": "drift",
+          "corridor-map": "drift",
+          "map-callout": "contradicted",
+          "panel-upnext": "drift",
+          "panel-alerts": "drift",
+          "panel-progress": "drift",
+          "panel-profile": "drift"
+        },
+        "at": "2026-11-20T16:06:43.497Z"
+      },
+      "forced": null,
+      "readingsSeen": {
+        "text hero-headline: cap height 32px in the build, 44.6px in the comp (-28%); set font-size so the cap height renders at 44.6px (font-match ranked Gemunu Libre 700 at 71px)": 2,
+        "text hero-ctas: letter-spacing is tighter than the comp's (gap 0.022 vs 0.077 of the cap height); set letter-spacing to open it by about 2px": 2,
+        "text status-block: ink is #349ed3 in the build, #939698 in the comp; use the comp's colour": 2,
+        "text hero-ctas: ink is #0875c8 in the build, #09a8eb in the comp; use the comp's colour": 2,
+        "text popular-list: ink is #5ca1dc in the build, #b8bbbf in the comp; use the comp's colour": 2
+      },
+      "records": 1,
+      "history": [
+        {
+          "at": "2026-11-20T16:06:43.501Z",
+          "score": 0.6101,
+          "worstIds": [
+            "map-callout",
+            "hero-headline",
+            "hero-ctas"
+          ],
+          "blockingReasons": [
+            "hero overall 61.0% < 72% (structure 56%, color 94%, detail 41%)",
+            "region status-block is missing (detail 7%, structure 75%): the comp shows material the build does not",
+            "region map-callout (control) is contradicted (structure 38%, detail added 23%): this control differs from the comp: inspect its lettering and visible shape separately against the crop and the measured readings; preserve the region's control classification",
+            "control hero-ctas drifts to 62% (structure 66%, color 79%): open .impeccable/review/diff/hero/regions/hero-ctas.png and compare its lettering and visible shape separately; use the measured readings and preserve the region's control classification",
+            "region hero-ctas: its ink sits in a 323x39px box in the comp and 263x47px in the build (padding, row height, or size); match the box, not only the position",
+            "artifact draws an illustration in inline SVG: <svg viewBox=\"0 0 640 432\" role=\"img\" aria-labelledby=\"corridor-title\"...> (14 shapes, 47 chars of path data, 640px). Drawings, diagrams, notation, and leader lines are plates or belong to the plate they annotate; only icon-sized SVG (under 64px, a few paths) is code",
+            "text hero-headline: cap height 32px in the build, 44.6px in the comp (-28%); set font-size so the cap height renders at 44.6px (font-match ranked Gemunu Libre 700 at 71px)",
+            "text hero-ctas: letter-spacing is tighter than the comp's (gap 0.022 vs 0.077 of the cap height); set letter-spacing to open it by about 2px",
+            "text status-block: ink is #349ed3 in the build, #939698 in the comp; use the comp's colour",
+            "text hero-ctas: ink is #0875c8 in the build, #09a8eb in the comp; use the comp's colour",
+            "text popular-list: ink is #5ca1dc in the build, #b8bbbf in the comp; use the comp's colour",
+            "the build carries ink in 4 grid cells where the comp is calm (J1, H5, H6, A9); nothing exists on the page that the comp does not show (a kicker, an extra nav item, a divider, a second row of controls); remove it or name it in a stated decision after the hero passes"
+          ],
+          "regionVerdicts": {
+            "nav-rail": "drift",
+            "brand": "drift",
+            "nav-links": "drift",
+            "status-block": "missing",
+            "hero-headline": "drift",
+            "hero-sub": "drift",
+            "hero-ctas": "drift",
+            "popular-list": "drift",
+            "corridor-map": "drift",
+            "map-callout": "contradicted",
+            "panel-upnext": "drift",
+            "panel-alerts": "drift",
+            "panel-progress": "drift",
+            "panel-profile": "drift"
+          },
+          "artifactHash": "91207c3ce917"
+        }
+      ]
+    },
+    "sections": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "motion": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "responsive": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "review": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": null,
+  "decisionComp": ".impeccable\\mocks\\decision\\challenger-transit.png",
+  "plates": {}
+}

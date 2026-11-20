@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 3,
+  "stage": "components",
+  "id": "components",
+  "title": "Plan and asset review · riffle_web_app.html",
+  "comp": {
+    "path": ".impeccable/mocks/decision/challenger-transit.png",
+    "width": 1280,
+    "height": 720
+  },
+  "specSha256": "2ecdb52082c7b069b9d7830756fcd2e4a9619d0b050589fdfa402e7a570790e5",
+  "components": [
+    {
+      "id": "corridor-map",
+      "name": "Corridor map",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.5,
+        "y": 0.1,
+        "w": 0.5,
+        "h": 0.6
+      },
+      "note": "Learning corridor as live SVG chart from roadmap stations",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": true,
+      "dependencies": []
+    },
+    {
+      "id": "panel-upnext",
+      "name": "Panel upnext",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.2,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "note": "Up next / upcoming drills panel",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "panel-alerts",
+      "name": "Panel alerts",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.4,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "note": "Practice notes and roadmap status panel",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "panel-progress",
+      "name": "Panel progress",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.6,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "note": "Progress stats panel",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    },
+    {
+      "id": "panel-profile",
+      "name": "Panel profile",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0.8,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "note": "Profile / skill summary panel",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "codeDrawn": false,
+      "dependencies": []
+    }
+  ],
+  "codeRegions": [
+    {
+      "id": "nav-rail",
+      "name": "Nav rail",
+      "kind": "chrome",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0.2,
+        "h": 1
+      },
+      "note": "Left navigation rail with brand and nav links"
+    },
+    {
+      "id": "brand",
+      "name": "Brand",
+      "kind": "text",
+      "box": {
+        "x": 0.0141,
+        "y": 0.0333,
+        "w": 0.0984,
+        "h": 0.0667
+      },
+      "note": "Riffle wordmark"
+    },
+    {
+      "id": "nav-links",
+      "name": "Nav links",
+      "kind": "control",
+      "box": {
+        "x": 0,
+        "y": 0.1,
+        "w": 0.2,
+        "h": 0.5
+      },
+      "note": "Overview Preferences Roadmap Library Practice buttons"
+    },
+    {
+      "id": "status-block",
+      "name": "Status block",
+      "kind": "text",
+      "box": {
+        "x": 0,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "note": "Practice continuity status and local session time"
+    },
+    {
+      "id": "hero-headline",
+      "name": "Hero headline",
+      "kind": "text",
+      "box": {
+        "x": 0.2,
+        "y": 0.1417,
+        "w": 0.3,
+        "h": 0.1583
+      },
+      "note": "Primary Overview headline"
+    },
+    {
+      "id": "hero-sub",
+      "name": "Hero sub",
+      "kind": "text",
+      "box": {
+        "x": 0.2,
+        "y": 0.3167,
+        "w": 0.1875,
+        "h": 0.075
+      },
+      "note": "Supporting sentence about continuous practice"
+    },
+    {
+      "id": "hero-ctas",
+      "name": "Hero ctas",
+      "kind": "control",
+      "box": {
+        "x": 0.2,
+        "y": 0.4,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "note": "Resume Practice and View Roadmap buttons"
+    },
+    {
+      "id": "popular-list",
+      "name": "Popular list",
+      "kind": "text",
+      "box": {
+        "x": 0.2,
+        "y": 0.5,
+        "w": 0.3,
+        "h": 0.2
+      },
+      "note": "Upcoming lessons list with durations"
+    },
+    {
+      "id": "map-callout",
+      "name": "Map callout",
+      "kind": "control",
+      "box": {
+        "x": 0.6,
+        "y": 0.2,
+        "w": 0.3,
+        "h": 0.2
+      },
+      "note": "Next station callout with Resume Practice"
+    }
+  ]
+}

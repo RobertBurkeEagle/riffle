@@ -917,17 +917,28 @@ function switchView(viewId) {
   const targetView = document.getElementById(viewId);
   if (targetView) targetView.classList.remove('hidden');
 
-  document.querySelectorAll('.nav-link').forEach((el) => {
-    el.classList.remove('text-app-accent', 'bg-[#2A2A2A]');
-    el.classList.add('text-app-muted', 'hover:text-app-text', 'hover:bg-[#2A2A2A]');
+  const shellRail = document.getElementById('shell-rail');
+  const main = document.querySelector('#app-shell > main');
+  const onDashboard = viewId === 'dashboard';
+  if (shellRail) shellRail.classList.toggle('hidden', onDashboard);
+  if (main) main.classList.toggle('p-8', !onDashboard);
+
+  document.querySelectorAll('#shell-rail .nav-link').forEach((el) => {
+    el.classList.remove('text-app-accent', 'bg-[#E0F4FA]');
+    el.classList.add('text-app-muted', 'hover:text-app-text', 'hover:bg-[#E8EEF3]');
+  });
+  document.querySelectorAll('#dashboard .r-nav-links .nav-link').forEach((el) => {
+    el.classList.remove('is-active');
   });
 
   const navId = viewId === 'lesson' ? 'roadmap' : viewId;
   const activeNav = document.getElementById('nav-' + navId);
   if (activeNav) {
-    activeNav.classList.remove('text-app-muted', 'hover:text-app-text', 'hover:bg-[#2A2A2A]');
-    activeNav.classList.add('text-app-accent', 'bg-[#2A2A2A]');
+    activeNav.classList.remove('text-app-muted', 'hover:text-app-text', 'hover:bg-[#E8EEF3]');
+    activeNav.classList.add('text-app-accent', 'bg-[#E0F4FA]');
   }
+  const dashNav = document.getElementById('dash-nav-' + navId);
+  if (dashNav) dashNav.classList.add('is-active');
 
   if (viewId === 'practice') refreshPracticeSession();
   lucide.createIcons();

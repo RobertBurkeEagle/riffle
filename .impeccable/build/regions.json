@@ -1,0 +1,18 @@
+{
+  "regions": [
+    { "id": "nav-rail", "kind": "chrome", "grid": "A0:B9", "note": "Left navigation rail with brand and nav links", "container": true },
+    { "id": "brand", "kind": "text", "grid": "A0:B0", "note": "Riffle wordmark" },
+    { "id": "nav-links", "kind": "control", "grid": "A1:B5", "note": "Overview Preferences Roadmap Library Practice buttons" },
+    { "id": "status-block", "kind": "text", "grid": "A7:B8", "note": "Practice continuity status and local session time" },
+    { "id": "hero-headline", "kind": "text", "grid": "C1:E2", "note": "Primary Overview headline" },
+    { "id": "hero-sub", "kind": "text", "grid": "C3:E3", "note": "Supporting sentence about continuous practice" },
+    { "id": "hero-ctas", "kind": "control", "grid": "C4:E4", "note": "Resume Practice and View Roadmap buttons" },
+    { "id": "popular-list", "kind": "text", "grid": "C5:E6", "note": "Upcoming lessons list with durations" },
+    { "id": "corridor-map", "kind": "chrome", "grid": "F1:J6", "note": "Learning corridor as live SVG chart from roadmap stations", "container": true, "codeDrawn": true },
+    { "id": "map-callout", "kind": "control", "grid": "G2:I3", "note": "Next station callout with Resume Practice" },
+    { "id": "panel-upnext", "kind": "chrome", "grid": "C7:D9", "note": "Up next / upcoming drills panel" },
+    { "id": "panel-alerts", "kind": "chrome", "grid": "E7:F9", "note": "Practice notes and roadmap status panel" },
+    { "id": "panel-progress", "kind": "chrome", "grid": "G7:H9", "note": "Progress stats panel" },
+    { "id": "panel-profile", "kind": "chrome", "grid": "I7:J9", "note": "Profile / skill summary panel" }
+  ]
+}

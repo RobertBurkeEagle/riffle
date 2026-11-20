@@ -1,0 +1,937 @@
+{
+  "tool": "comp-spec",
+  "version": 1,
+  "createdAt": "2026-11-20T15:57:34.149Z",
+  "comp": ".impeccable\\mocks\\decision\\challenger-transit.png",
+  "warnings": [
+    "region nav-rail: \"container\": true set in the regions file (the region-size refusal is overridden: one undivided element)",
+    "region corridor-map: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region corridor-map: \"container\": true set in the regions file (the region-size refusal is overridden: one undivided element)"
+  ],
+  "uncoveredInkCells": [
+    "J0"
+  ],
+  "compSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "aspect": 1.7778,
+  "orientation": "landscape",
+  "palette": [
+    {
+      "hex": "#f7f7f8",
+      "coverage": 0.9511
+    },
+    {
+      "hex": "#0a1421",
+      "coverage": 0.017
+    },
+    {
+      "hex": "#bbbfc4",
+      "coverage": 0.012
+    },
+    {
+      "hex": "#5e6168",
+      "coverage": 0.01
+    },
+    {
+      "hex": "#09a9ee",
+      "coverage": 0.0099
+    }
+  ],
+  "bands": [
+    {
+      "y": 0.1528,
+      "strength": 0.2104
+    },
+    {
+      "y": 0.2361,
+      "strength": 0.6424
+    },
+    {
+      "y": 0.3194,
+      "strength": 0.2531
+    },
+    {
+      "y": 0.4722,
+      "strength": 0.2488
+    },
+    {
+      "y": 0.7083,
+      "strength": 0.2615
+    },
+    {
+      "y": 0.8889,
+      "strength": 0.315
+    }
+  ],
+  "regions": [
+    {
+      "id": "nav-rail",
+      "kind": "chrome",
+      "note": "Left navigation rail with brand and nav links",
+      "grid": "A0:B9",
+      "container": true,
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0.2,
+        "h": 1
+      },
+      "px": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 720
+      },
+      "aspect": 0.3556,
+      "palette": [
+        {
+          "hex": "#f7f8f8",
+          "coverage": 0.9439
+        },
+        {
+          "hex": "#0a1421",
+          "coverage": 0.0261
+        },
+        {
+          "hex": "#b3b7bd",
+          "coverage": 0.0106
+        },
+        {
+          "hex": "#35393f",
+          "coverage": 0.0101
+        },
+        {
+          "hex": "#08a8ee",
+          "coverage": 0.0094
+        }
+      ],
+      "detail": {
+        "energy": 17.783
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    },
+    {
+      "id": "brand",
+      "kind": "text",
+      "note": "Riffle wordmark",
+      "grid": "A0:B0",
+      "coverBox": {
+        "x": 0,
+        "y": 0,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0141,
+        "y": 0.0333,
+        "w": 0.0984,
+        "h": 0.0667
+      },
+      "px": {
+        "x": 18,
+        "y": 24,
+        "w": 126,
+        "h": 48
+      },
+      "aspect": 2.625,
+      "palette": [
+        {
+          "hex": "#f6f7f7",
+          "coverage": 0.6728
+        },
+        {
+          "hex": "#091623",
+          "coverage": 0.2485
+        },
+        {
+          "hex": "#303c3c",
+          "coverage": 0.0278
+        },
+        {
+          "hex": "#616370",
+          "coverage": 0.0262
+        },
+        {
+          "hex": "#2e3040",
+          "coverage": 0.0247
+        }
+      ],
+      "detail": {
+        "energy": 31.3115
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 6,
+          "capHeightPx": 34.2,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.4672,
+          "advTall": 0.4672,
+          "advX": 0.6716,
+          "gap": 0.0876,
+          "xRatio": 0.7022,
+          "stemW": 0.1835,
+          "contrast": 1.1289,
+          "serif": 0.8573,
+          "densTall": 0.6315,
+          "densX": 0.6359,
+          "weight": 0.6315
+        },
+        "widthClass": "normal",
+        "weightClass": "bold"
+      }
+    },
+    {
+      "id": "nav-links",
+      "kind": "control",
+      "note": "Overview Preferences Roadmap Library Practice buttons",
+      "grid": "A1:B5",
+      "box": {
+        "x": 0,
+        "y": 0.1,
+        "w": 0.2,
+        "h": 0.5
+      },
+      "px": {
+        "x": 0,
+        "y": 72,
+        "w": 256,
+        "h": 360
+      },
+      "aspect": 0.7111,
+      "palette": [
+        {
+          "hex": "#f7f8f8",
+          "coverage": 0.9189
+        },
+        {
+          "hex": "#0c1521",
+          "coverage": 0.036
+        },
+        {
+          "hex": "#09a8ed",
+          "coverage": 0.0203
+        },
+        {
+          "hex": "#afb3b9",
+          "coverage": 0.0137
+        },
+        {
+          "hex": "#36393c",
+          "coverage": 0.0111
+        }
+      ],
+      "detail": {
+        "energy": 20.7447
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    },
+    {
+      "id": "status-block",
+      "kind": "text",
+      "note": "Practice continuity status and local session time",
+      "grid": "A7:B8",
+      "box": {
+        "x": 0,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "px": {
+        "x": 0,
+        "y": 504,
+        "w": 256,
+        "h": 144
+      },
+      "aspect": 1.7778,
+      "palette": [
+        {
+          "hex": "#f7f7f8",
+          "coverage": 0.9705
+        },
+        {
+          "hex": "#c0c2ca",
+          "coverage": 0.0106
+        },
+        {
+          "hex": "#939698",
+          "coverage": 0.0079
+        },
+        {
+          "hex": "#66696d",
+          "coverage": 0.0066
+        },
+        {
+          "hex": "#4a4a5a",
+          "coverage": 0.0044
+        }
+      ],
+      "detail": {
+        "energy": 15.0284
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 4,
+          "glyphs": 28,
+          "capHeightPx": 9.2,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.5246,
+          "advTall": 0.5246,
+          "advX": 0.5362,
+          "gap": 0.1269,
+          "xRatio": 0.6855,
+          "stemW": 0.1665,
+          "contrast": 0.9333,
+          "serif": 0.3239,
+          "densTall": 0.5717,
+          "densX": 0.6032,
+          "weight": 0.5717
+        },
+        "widthClass": "condensed",
+        "weightClass": "bold"
+      }
+    },
+    {
+      "id": "hero-headline",
+      "kind": "text",
+      "note": "Primary Overview headline",
+      "grid": "C1:E2",
+      "coverBox": {
+        "x": 0.2,
+        "y": 0.1,
+        "w": 0.3,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.2,
+        "y": 0.1417,
+        "w": 0.3,
+        "h": 0.1583
+      },
+      "px": {
+        "x": 256,
+        "y": 102,
+        "w": 384,
+        "h": 114
+      },
+      "aspect": 3.3684,
+      "palette": [
+        {
+          "hex": "#f7f7f8",
+          "coverage": 0.7343
+        },
+        {
+          "hex": "#0a1424",
+          "coverage": 0.2214
+        },
+        {
+          "hex": "#9ca2aa",
+          "coverage": 0.0192
+        },
+        {
+          "hex": "#c0c7cd",
+          "coverage": 0.0151
+        },
+        {
+          "hex": "#797b88",
+          "coverage": 0.01
+        }
+      ],
+      "detail": {
+        "energy": 53.0465
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 2,
+          "glyphs": 17,
+          "capHeightPx": 44.6,
+          "inkIsDark": true,
+          "allCaps": true,
+          "advance": 0.5411,
+          "advTall": 0.5411,
+          "advX": null,
+          "gap": 0.1916,
+          "xRatio": null,
+          "stemW": 0.1838,
+          "contrast": 1.1396,
+          "serif": 1.2556,
+          "densTall": 0.5999,
+          "densX": null,
+          "weight": 0.5999
+        },
+        "widthClass": "condensed",
+        "weightClass": "bold",
+        "chosen": {
+          "family": "Gemunu Libre",
+          "weight": 700,
+          "fontSizePx": 71,
+          "source": "index",
+          "fp": {
+            "lines": 1,
+            "glyphs": 23,
+            "capHeightPx": 44.6,
+            "inkIsDark": true,
+            "allCaps": true,
+            "advance": 0.5835,
+            "advTall": 0.5835,
+            "advX": null,
+            "gap": 0.202,
+            "xRatio": null,
+            "stemW": 0.1807,
+            "contrast": 1.1285,
+            "serif": 2.8177,
+            "densTall": 0.6022,
+            "densX": null,
+            "weight": 0.6022
+          },
+          "stamp": "febe647574c0"
+        }
+      }
+    },
+    {
+      "id": "hero-sub",
+      "kind": "text",
+      "note": "Supporting sentence about continuous practice",
+      "grid": "C3:E3",
+      "coverBox": {
+        "x": 0.2,
+        "y": 0.3,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.2,
+        "y": 0.3167,
+        "w": 0.1875,
+        "h": 0.075
+      },
+      "px": {
+        "x": 256,
+        "y": 228,
+        "w": 240,
+        "h": 54
+      },
+      "aspect": 4.4444,
+      "palette": [
+        {
+          "hex": "#f7f7f8",
+          "coverage": 0.8442
+        },
+        {
+          "hex": "#262931",
+          "coverage": 0.0533
+        },
+        {
+          "hex": "#c7cbd0",
+          "coverage": 0.0441
+        },
+        {
+          "hex": "#72747d",
+          "coverage": 0.032
+        },
+        {
+          "hex": "#959a9e",
+          "coverage": 0.0263
+        }
+      ],
+      "detail": {
+        "energy": 52.2694
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 2,
+          "glyphs": 49,
+          "capHeightPx": 12.7,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.5551,
+          "advTall": 0.5436,
+          "advX": 0.5551,
+          "gap": 0.0793,
+          "xRatio": 0.7061,
+          "stemW": 0.1615,
+          "contrast": 1.0179,
+          "serif": 0.4223,
+          "densTall": 0.5037,
+          "densX": 0.5906,
+          "weight": 0.5037
+        },
+        "widthClass": "condensed",
+        "weightClass": "medium"
+      }
+    },
+    {
+      "id": "hero-ctas",
+      "kind": "control",
+      "note": "Resume Practice and View Roadmap buttons",
+      "grid": "C4:E4",
+      "box": {
+        "x": 0.2,
+        "y": 0.4,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "px": {
+        "x": 256,
+        "y": 288,
+        "w": 384,
+        "h": 72
+      },
+      "aspect": 5.3333,
+      "palette": [
+        {
+          "hex": "#f6f6f7",
+          "coverage": 0.8036
+        },
+        {
+          "hex": "#09a8eb",
+          "coverage": 0.1435
+        },
+        {
+          "hex": "#80cfec",
+          "coverage": 0.0363
+        },
+        {
+          "hex": "#98f3f8",
+          "coverage": 0.0083
+        },
+        {
+          "hex": "#2fa4c8",
+          "coverage": 0.0083
+        }
+      ],
+      "detail": {
+        "energy": 15.0441
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    },
+    {
+      "id": "popular-list",
+      "kind": "text",
+      "note": "Upcoming lessons list with durations",
+      "grid": "C5:E6",
+      "box": {
+        "x": 0.2,
+        "y": 0.5,
+        "w": 0.3,
+        "h": 0.2
+      },
+      "px": {
+        "x": 256,
+        "y": 360,
+        "w": 384,
+        "h": 144
+      },
+      "aspect": 2.6667,
+      "palette": [
+        {
+          "hex": "#f7f7f8",
+          "coverage": 0.9798
+        },
+        {
+          "hex": "#b8bbbf",
+          "coverage": 0.0082
+        },
+        {
+          "hex": "#87898f",
+          "coverage": 0.007
+        },
+        {
+          "hex": "#5c5e61",
+          "coverage": 0.0051
+        }
+      ],
+      "detail": {
+        "energy": 9.5964
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 4,
+          "glyphs": 44,
+          "capHeightPx": 8.9,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.6047,
+          "advTall": 0.584,
+          "advX": 0.5152,
+          "gap": 0.0723,
+          "xRatio": 0.6512,
+          "stemW": 0.2079,
+          "contrast": 1.0276,
+          "serif": 0.3821,
+          "densTall": 0.6391,
+          "densX": 0.6783,
+          "weight": 0.6391
+        },
+        "widthClass": "condensed",
+        "weightClass": "bold"
+      }
+    },
+    {
+      "id": "corridor-map",
+      "kind": "chrome",
+      "note": "Learning corridor as live SVG chart from roadmap stations",
+      "grid": "F1:J6",
+      "codeDrawn": true,
+      "container": true,
+      "box": {
+        "x": 0.5,
+        "y": 0.1,
+        "w": 0.5,
+        "h": 0.6
+      },
+      "px": {
+        "x": 640,
+        "y": 72,
+        "w": 640,
+        "h": 432
+      },
+      "aspect": 1.4815,
+      "palette": [
+        {
+          "hex": "#f7f7f8",
+          "coverage": 0.9557
+        },
+        {
+          "hex": "#c7c9cc",
+          "coverage": 0.0169
+        },
+        {
+          "hex": "#0eaced",
+          "coverage": 0.0167
+        },
+        {
+          "hex": "#2ab058",
+          "coverage": 0.0063
+        },
+        {
+          "hex": "#a8f1f8",
+          "coverage": 0.0044
+        }
+      ],
+      "detail": {
+        "energy": 14.6532
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    },
+    {
+      "id": "map-callout",
+      "kind": "control",
+      "note": "Next station callout with Resume Practice",
+      "grid": "G2:I3",
+      "box": {
+        "x": 0.6,
+        "y": 0.2,
+        "w": 0.3,
+        "h": 0.2
+      },
+      "px": {
+        "x": 768,
+        "y": 144,
+        "w": 384,
+        "h": 144
+      },
+      "aspect": 2.6667,
+      "palette": [
+        {
+          "hex": "#f6f7f8",
+          "coverage": 0.8616
+        },
+        {
+          "hex": "#0dabee",
+          "coverage": 0.0758
+        },
+        {
+          "hex": "#2eb05b",
+          "coverage": 0.0312
+        },
+        {
+          "hex": "#a7f0f8",
+          "coverage": 0.02
+        },
+        {
+          "hex": "#0d0d0d",
+          "coverage": 0.0116
+        }
+      ],
+      "detail": {
+        "energy": 28.1833
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    },
+    {
+      "id": "panel-upnext",
+      "kind": "chrome",
+      "note": "Up next / upcoming drills panel",
+      "grid": "C7:D9",
+      "box": {
+        "x": 0.2,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 256,
+        "y": 504,
+        "w": 256,
+        "h": 216
+      },
+      "aspect": 1.1852,
+      "palette": [
+        {
+          "hex": "#f7f7f7",
+          "coverage": 0.9714
+        },
+        {
+          "hex": "#adb0b3",
+          "coverage": 0.0116
+        },
+        {
+          "hex": "#72747a",
+          "coverage": 0.0106
+        },
+        {
+          "hex": "#4d4d53",
+          "coverage": 0.0052
+        },
+        {
+          "hex": "#c82828",
+          "coverage": 0.0011
+        }
+      ],
+      "detail": {
+        "energy": 12.0641
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    },
+    {
+      "id": "panel-alerts",
+      "kind": "chrome",
+      "note": "Practice notes and roadmap status panel",
+      "grid": "E7:F9",
+      "box": {
+        "x": 0.4,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 512,
+        "y": 504,
+        "w": 256,
+        "h": 216
+      },
+      "aspect": 1.1852,
+      "palette": [
+        {
+          "hex": "#f7f7f7",
+          "coverage": 0.9517
+        },
+        {
+          "hex": "#acb1b5",
+          "coverage": 0.0229
+        },
+        {
+          "hex": "#6e7075",
+          "coverage": 0.0187
+        },
+        {
+          "hex": "#4a4d54",
+          "coverage": 0.006
+        },
+        {
+          "hex": "#e8b8b8",
+          "coverage": 0.0007
+        }
+      ],
+      "detail": {
+        "energy": 18.113
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    },
+    {
+      "id": "panel-progress",
+      "kind": "chrome",
+      "note": "Progress stats panel",
+      "grid": "G7:H9",
+      "box": {
+        "x": 0.6,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 768,
+        "y": 504,
+        "w": 256,
+        "h": 216
+      },
+      "aspect": 1.1852,
+      "palette": [
+        {
+          "hex": "#f7f7f7",
+          "coverage": 0.9723
+        },
+        {
+          "hex": "#5c5e64",
+          "coverage": 0.0126
+        },
+        {
+          "hex": "#999a9f",
+          "coverage": 0.0097
+        },
+        {
+          "hex": "#c0c0c8",
+          "coverage": 0.0054
+        }
+      ],
+      "detail": {
+        "energy": 14.6821
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    },
+    {
+      "id": "panel-profile",
+      "kind": "chrome",
+      "note": "Profile / skill summary panel",
+      "grid": "I7:J9",
+      "box": {
+        "x": 0.8,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.3
+      },
+      "px": {
+        "x": 1024,
+        "y": 504,
+        "w": 256,
+        "h": 216
+      },
+      "aspect": 1.1852,
+      "palette": [
+        {
+          "hex": "#f4f6f7",
+          "coverage": 0.9318
+        },
+        {
+          "hex": "#e8b036",
+          "coverage": 0.0229
+        },
+        {
+          "hex": "#3c9353",
+          "coverage": 0.0224
+        },
+        {
+          "hex": "#568ad0",
+          "coverage": 0.0114
+        },
+        {
+          "hex": "#f8b6b8",
+          "coverage": 0.0114
+        }
+      ],
+      "detail": {
+        "energy": 19.2821
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      }
+    }
+  ],
+  "compSha256": "781638bee6467d835cbfe9ed507f6af0874f1a27c9f130f48d450e2c68629c5a",
+  "regionsSource": {
+    "path": ".impeccable\\build\\regions.json",
+    "sha256": "b9e43c80958f030c09ac1c6f5ca460cd9b1874a2b125e6cbccc5356f036d9a02"
+  }
+}
