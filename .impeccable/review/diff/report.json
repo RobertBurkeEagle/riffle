@@ -1,0 +1,577 @@
+{
+  "tool": "comp-diff",
+  "version": 1,
+  "createdAt": "2026-11-21T02:15:40.167Z",
+  "label": "desktop",
+  "comp": ".impeccable\\mocks\\decision\\challenger-transit.png",
+  "build": ".impeccable\\review\\desktop.png",
+  "spec": ".impeccable\\build\\spec.json",
+  "compSize": "1280x720",
+  "buildSize": "1440x810",
+  "align": "top",
+  "overall": 0.6896,
+  "verdict": "drift",
+  "scores": {
+    "overall": 0.6896,
+    "structure": 0.6856,
+    "color": 0.9562,
+    "colorIntersection": 0.9234,
+    "paletteMatch": 0.9739,
+    "detail": 0.4352,
+    "detailRaw": 0.4508,
+    "detailAdded": 0.0313,
+    "bands": 0.6786
+  },
+  "palette": {
+    "comp": [
+      {
+        "hex": "#f7f7f8",
+        "coverage": 0.9465
+      },
+      {
+        "hex": "#0a1421",
+        "coverage": 0.0169
+      },
+      {
+        "hex": "#bbbfc4",
+        "coverage": 0.0119
+      },
+      {
+        "hex": "#5e6168",
+        "coverage": 0.0099
+      },
+      {
+        "hex": "#09a9ee",
+        "coverage": 0.0099
+      },
+      {
+        "hex": "#90959a",
+        "coverage": 0.0049
+      }
+    ],
+    "build": [
+      {
+        "hex": "#f7f8f8",
+        "coverage": 0.959
+      },
+      {
+        "hex": "#081837",
+        "coverage": 0.0227
+      },
+      {
+        "hex": "#08a8e8",
+        "coverage": 0.012
+      },
+      {
+        "hex": "#c8c8cd",
+        "coverage": 0.0047
+      },
+      {
+        "hex": "#28b858",
+        "coverage": 0.0009
+      },
+      {
+        "hex": "#989898",
+        "coverage": 0.0008
+      }
+    ]
+  },
+  "regions": [
+    {
+      "id": "nav-rail",
+      "x": 0,
+      "y": 0,
+      "w": 0.2,
+      "h": 1,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.6187,
+        "structure": 0.7577,
+        "color": 0.9426,
+        "colorIntersection": 0.898,
+        "paletteMatch": 0.9666,
+        "detail": 0.0715,
+        "detailRaw": 0.1028,
+        "detailAdded": 0.0625,
+        "bands": 0.6667
+      },
+      "verdict": "missing",
+      "inkBox": {
+        "comp": {
+          "x": 22,
+          "y": 32,
+          "w": 234,
+          "h": 639
+        },
+        "build": {
+          "x": 0,
+          "y": 43,
+          "w": 102,
+          "h": 519
+        }
+      }
+    },
+    {
+      "id": "brand",
+      "x": 0.0141,
+      "y": 0.0333,
+      "w": 0.0984,
+      "h": 0.0667,
+      "kind": "text",
+      "score": {
+        "overall": 0.4045,
+        "structure": 0.3528,
+        "color": 0.7768,
+        "colorIntersection": 0.6263,
+        "paletteMatch": 0.8578,
+        "detail": 0,
+        "detailRaw": 0.0229,
+        "detailAdded": 0.0521,
+        "bands": 0.3385
+      },
+      "verdict": "missing",
+      "inkBox": {
+        "comp": {
+          "x": 7,
+          "y": 8,
+          "w": 111,
+          "h": 36
+        },
+        "build": {
+          "x": 1,
+          "y": 19,
+          "w": 29,
+          "h": 10
+        }
+      }
+    },
+    {
+      "id": "nav-links",
+      "x": 0,
+      "y": 0.1,
+      "w": 0.2,
+      "h": 0.5,
+      "kind": "control",
+      "score": {
+        "overall": 0.6578,
+        "structure": 0.7254,
+        "color": 0.9257,
+        "colorIntersection": 0.8806,
+        "paletteMatch": 0.95,
+        "detail": 0.0371,
+        "detailRaw": 0.0683,
+        "detailAdded": 0.0625,
+        "bands": 0.6333
+      },
+      "verdict": "missing",
+      "inkBox": {
+        "comp": {
+          "x": 22,
+          "y": 0,
+          "w": 234,
+          "h": 360
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 74,
+          "h": 103
+        }
+      }
+    },
+    {
+      "id": "status-block",
+      "x": 0,
+      "y": 0.7,
+      "w": 0.2,
+      "h": 0.2,
+      "kind": "text",
+      "score": {
+        "overall": 0.6902,
+        "structure": 0.7969,
+        "color": 0.9518,
+        "colorIntersection": 0.911,
+        "paletteMatch": 0.9737,
+        "detail": 0.0921,
+        "detailRaw": 0.1442,
+        "detailAdded": 0.1042,
+        "bands": 0.4
+      },
+      "verdict": "missing",
+      "inkBox": {
+        "comp": {
+          "x": 24,
+          "y": 6,
+          "w": 232,
+          "h": 125
+        },
+        "build": {
+          "x": 0,
+          "y": 3,
+          "w": 102,
+          "h": 55
+        }
+      }
+    },
+    {
+      "id": "hero-headline",
+      "x": 0.2,
+      "y": 0.1417,
+      "w": 0.3,
+      "h": 0.1583,
+      "kind": "text",
+      "score": {
+        "overall": 0.4393,
+        "structure": 0.4058,
+        "color": 0.8505,
+        "colorIntersection": 0.7056,
+        "paletteMatch": 0.9285,
+        "detail": 0,
+        "detailRaw": 0.018,
+        "detailAdded": 0.0417,
+        "bands": 0.2375
+      },
+      "verdict": "missing",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 6,
+          "w": 384,
+          "h": 108
+        },
+        "build": {
+          "x": 1,
+          "y": 2,
+          "w": 64,
+          "h": 22
+        }
+      }
+    },
+    {
+      "id": "hero-sub",
+      "x": 0.2,
+      "y": 0.3167,
+      "w": 0.1875,
+      "h": 0.075,
+      "kind": "text",
+      "score": {
+        "overall": 0.5643,
+        "structure": 0.515,
+        "color": 0.8233,
+        "colorIntersection": 0.7972,
+        "paletteMatch": 0.8374,
+        "detail": 0.2356,
+        "detailRaw": 0.3398,
+        "detailAdded": 0.2083,
+        "bands": 0.6564
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 6,
+          "w": 231,
+          "h": 39
+        },
+        "build": {
+          "x": 0,
+          "y": 4,
+          "w": 230,
+          "h": 32
+        }
+      }
+    },
+    {
+      "id": "hero-ctas",
+      "x": 0.2,
+      "y": 0.4,
+      "w": 0.3,
+      "h": 0.1,
+      "kind": "control",
+      "score": {
+        "overall": 0.6577,
+        "structure": 0.7116,
+        "color": 0.9095,
+        "colorIntersection": 0.8427,
+        "paletteMatch": 0.9454,
+        "detail": 0.0958,
+        "detailRaw": 0.2104,
+        "detailAdded": 0.2292,
+        "bands": 0.3
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 15,
+          "w": 323,
+          "h": 39
+        },
+        "build": {
+          "x": 0,
+          "y": 2,
+          "w": 279,
+          "h": 32
+        }
+      }
+    },
+    {
+      "id": "popular-list",
+      "x": 0.2,
+      "y": 0.5,
+      "w": 0.3,
+      "h": 0.2,
+      "kind": "text",
+      "score": {
+        "overall": 0.6994,
+        "structure": 0.7559,
+        "color": 0.9526,
+        "colorIntersection": 0.9018,
+        "paletteMatch": 0.9799,
+        "detail": 0.2156,
+        "detailRaw": 0.3197,
+        "detailAdded": 0.2083,
+        "bands": 0.51
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 10,
+          "w": 313,
+          "h": 96
+        },
+        "build": {
+          "x": 0,
+          "y": 6,
+          "w": 384,
+          "h": 138
+        }
+      }
+    },
+    {
+      "id": "corridor-map",
+      "x": 0.5,
+      "y": 0.1,
+      "w": 0.5,
+      "h": 0.6,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.8956,
+        "structure": 0.8929,
+        "color": 0.9713,
+        "colorIntersection": 0.9483,
+        "paletteMatch": 0.9837,
+        "detail": 0.761,
+        "detailRaw": 0.7714,
+        "detailAdded": 0.0208,
+        "bands": 1
+      },
+      "verdict": "match",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 9,
+          "w": 586,
+          "h": 375
+        },
+        "build": {
+          "x": 0,
+          "y": 9,
+          "w": 586,
+          "h": 367
+        }
+      }
+    },
+    {
+      "id": "map-callout",
+      "x": 0.6,
+      "y": 0.2,
+      "w": 0.3,
+      "h": 0.2,
+      "kind": "control",
+      "score": {
+        "overall": 0.6784,
+        "structure": 0.5856,
+        "color": 0.8942,
+        "colorIntersection": 0.7901,
+        "paletteMatch": 0.9502,
+        "detail": 0.5095,
+        "detailRaw": 0.5772,
+        "detailAdded": 0.1354,
+        "bands": 0.7543
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 144
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 144
+        }
+      }
+    },
+    {
+      "id": "panel-upnext",
+      "x": 0.2,
+      "y": 0.7,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.7092,
+        "structure": 0.7513,
+        "color": 0.9472,
+        "colorIntersection": 0.9023,
+        "paletteMatch": 0.9714,
+        "detail": 0.3376,
+        "detailRaw": 0.3949,
+        "detailAdded": 0.1146,
+        "bands": 0.8333
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 2,
+          "w": 255,
+          "h": 163
+        },
+        "build": {
+          "x": 18,
+          "y": 15,
+          "w": 220,
+          "h": 114
+        }
+      }
+    },
+    {
+      "id": "panel-alerts",
+      "x": 0.4,
+      "y": 0.7,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.6476,
+        "structure": 0.7359,
+        "color": 0.9379,
+        "colorIntersection": 0.8878,
+        "paletteMatch": 0.9648,
+        "detail": 0.2878,
+        "detailRaw": 0.3243,
+        "detailAdded": 0.0729,
+        "bands": 0.5571
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 6,
+          "w": 226,
+          "h": 148
+        },
+        "build": {
+          "x": 19,
+          "y": 15,
+          "w": 219,
+          "h": 54
+        }
+      }
+    },
+    {
+      "id": "panel-progress",
+      "x": 0.6,
+      "y": 0.7,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.575,
+        "structure": 0.7509,
+        "color": 0.9448,
+        "colorIntersection": 0.9122,
+        "paletteMatch": 0.9624,
+        "detail": 0.1278,
+        "detailRaw": 0.1851,
+        "detailAdded": 0.1146,
+        "bands": 0.2933
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 20,
+          "y": 6,
+          "w": 191,
+          "h": 162
+        },
+        "build": {
+          "x": 19,
+          "y": 15,
+          "w": 220,
+          "h": 90
+        }
+      }
+    },
+    {
+      "id": "panel-profile",
+      "x": 0.8,
+      "y": 0.7,
+      "w": 0.2,
+      "h": 0.3,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.5146,
+        "structure": 0.4647,
+        "color": 0.7859,
+        "colorIntersection": 0.584,
+        "paletteMatch": 0.8947,
+        "detail": 0.1787,
+        "detailRaw": 0.2933,
+        "detailAdded": 0.2292,
+        "bands": 0.7385
+      },
+      "verdict": "contradicted",
+      "inkBox": {
+        "comp": {
+          "x": 12,
+          "y": 18,
+          "w": 206,
+          "h": 150
+        },
+        "build": {
+          "x": 18,
+          "y": 15,
+          "w": 214,
+          "h": 123
+        }
+      }
+    }
+  ],
+  "files": {
+    "sideBySide": "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/side-by-side.png",
+    "heatmap": "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/heatmap.png",
+    "regionFiles": [
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/nav-rail.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/brand.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/nav-links.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/status-block.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/hero-headline.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/hero-sub.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/hero-ctas.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/popular-list.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/corridor-map.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/map-callout.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/panel-upnext.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/panel-alerts.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/panel-progress.png",
+      "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/regions/panel-profile.png"
+    ]
+  }
+}

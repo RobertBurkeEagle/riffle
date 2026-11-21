@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "stage": "hero",
+  "id": "hero",
+  "title": "First viewport",
+  "comp": {
+    "path": ".impeccable/mocks/decision/challenger-transit.png",
+    "width": 1280,
+    "height": 720
+  },
+  "components": [
+    {
+      "id": "first-viewport",
+      "name": "First viewport",
+      "medium": "HTML / CSS",
+      "note": "Assembled Bright Corridor Map Overview at 1280x720 with Riffle product content",
+      "box": { "x": 0, "y": 0, "w": 1, "h": 1 },
+      "preview": { "kind": "page", "path": "riffle_web_app.html" },
+      "dependencies": [
+        "css/corridor.css",
+        "src/app.js",
+        "src/domain/exercises.js",
+        "src/domain/learning-prompt.js",
+        "src/domain/lesson-player.js",
+        "src/domain/roadmap.js",
+        "src/domain/skill-check.js",
+        "src/domain/transpose.js",
+        "src/storage/profile-store.js",
+        "assets/corridor-map.png",
+        "fonts/GemunuLibre-Variable.ttf",
+        "fonts/SofiaSansCondensed-Variable.ttf",
+        "vendor/tailwindcss.js",
+        "vendor/lucide.min.js"
+      ]
+    }
+  ]
+}

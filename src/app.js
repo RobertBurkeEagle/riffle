@@ -6,6 +6,7 @@ import {
   refreshRoadmapAvailability,
   findNextLesson
 } from './domain/roadmap.js';
+import { buildCorridorMap } from './domain/corridor-map.js';
 import {
   buildExerciseSession,
   defaultDifficultyForSkill,
@@ -43,6 +44,11 @@ let practiceMode = 'chord';
 let practiceTranspose = 0;
 let practiceSession = null;
 let promptRefreshTimer = null;
+let activeDialogId = null;
+let dialogReturnFocus = null;
+let corridorModel = null;
+let selectedStationId = null;
+let clockTimerId = null;
 
 function persistCurrentUser() {
   if (!currentUser) return;
@@ -55,26 +61,74 @@ function showAuthError(msg) {
   el.classList.remove('hidden');
 }
 
+function getFocusable(container) {
+  return [
+    ...container.querySelectorAll(
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ].filter((el) => {
+    if (el.hasAttribute('hidden') || el.closest('[hidden]')) return false;
+    const style = window.getComputedStyle(el);
+    if (style.visibility === 'hidden' || style.display === 'none') return false;
+    return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  });
+}
+
+function openDialog(id, { initialFocus } = {}) {
+  const dialog = document.getElementById(id);
+  if (!dialog) return;
+  dialogReturnFocus = document.activeElement;
+  activeDialogId = id;
+  dialog.classList.remove('hidden');
+  dialog.removeAttribute('hidden');
+  const focusables = getFocusable(dialog);
+  const target =
+    (initialFocus && dialog.querySelector(initialFocus)) ||
+    focusables[0] ||
+    dialog;
+  requestAnimationFrame(() => target.focus?.());
+}
+
+function closeDialog(id) {
+  const dialog = document.getElementById(id);
+  if (!dialog) return;
+  dialog.classList.add('hidden');
+  dialog.setAttribute('hidden', '');
+  if (activeDialogId === id) activeDialogId = null;
+  const restore = dialogReturnFocus;
+  dialogReturnFocus = null;
+  if (restore && typeof restore.focus === 'function') {
+    requestAnimationFrame(() => restore.focus());
+  }
+}
+
 function setAuthTab(tab) {
   authTab = tab;
   const signin = document.getElementById('auth-tab-signin');
   const signup = document.getElementById('auth-tab-signup');
   const nameField = document.getElementById('auth-name-field');
   const submit = document.getElementById('auth-submit');
+  const password = document.getElementById('auth-password');
   document.getElementById('auth-error').classList.add('hidden');
 
   if (tab === 'signup') {
     signin.className = 'px-3 py-2 text-sm font-medium text-app-muted';
     signup.className =
       'px-3 py-2 text-sm font-medium text-app-accent border-b-2 border-app-accent -mb-px';
+    signin.setAttribute('aria-selected', 'false');
+    signup.setAttribute('aria-selected', 'true');
     nameField.classList.remove('hidden');
     submit.textContent = 'Create profile';
+    if (password) password.setAttribute('autocomplete', 'new-password');
   } else {
     signup.className = 'px-3 py-2 text-sm font-medium text-app-muted';
     signin.className =
       'px-3 py-2 text-sm font-medium text-app-accent border-b-2 border-app-accent -mb-px';
+    signin.setAttribute('aria-selected', 'true');
+    signup.setAttribute('aria-selected', 'false');
     nameField.classList.add('hidden');
     submit.textContent = 'Sign in';
+    if (password) password.setAttribute('autocomplete', 'current-password');
   }
 }
 
@@ -106,7 +160,7 @@ function continueAsGuest() {
 function enterApp(profile) {
   currentUser = profile;
   store.setSession(profile.id);
-  document.getElementById('auth-gate').classList.add('hidden');
+  closeDialog('auth-gate');
   practiceTranspose = 0;
   const diff = document.getElementById('practice-difficulty');
   if (diff) diff.value = defaultDifficultyForSkill(profile.skillLevel);
@@ -124,10 +178,10 @@ function signOut() {
   activeLesson = null;
   lessonDrill = null;
   practiceSession = null;
-  document.getElementById('auth-gate').classList.remove('hidden');
-  document.getElementById('skill-check-modal').classList.add('hidden');
+  closeDialog('skill-check-modal');
   document.getElementById('auth-form').reset();
   setAuthTab('signin');
+  openDialog('auth-gate', { initialFocus: '#auth-email' });
   lucide.createIcons();
 }
 
@@ -135,7 +189,7 @@ function openSkillCheck() {
   skillCheckIndex = 0;
   skillCheckScore = 0;
   skillCheckChoice = null;
-  document.getElementById('skill-check-modal').classList.remove('hidden');
+  openDialog('skill-check-modal');
   renderSkillCheckStep();
 }
 
@@ -167,6 +221,8 @@ function renderSkillCheckStep() {
     </div>
   `;
   skillCheckChoice = null;
+  const firstOption = container.querySelector('input[name="skill-q"]');
+  if (firstOption) requestAnimationFrame(() => firstOption.focus());
 }
 
 function advanceSkillCheck() {
@@ -185,7 +241,7 @@ function advanceSkillCheck() {
     if (diff) diff.value = defaultDifficultyForSkill(currentUser.skillLevel);
     rebuildLearningPrompt();
     persistCurrentUser();
-    document.getElementById('skill-check-modal').classList.add('hidden');
+    closeDialog('skill-check-modal');
     renderAll();
     refreshPracticeSession();
     return;
@@ -321,13 +377,13 @@ function renderRoadmap() {
         .map((phase) => {
           const icon =
             phase.status === 'completed'
-              ? '<i data-lucide="check-circle-2" class="w-6 h-6 text-[#10B981]"></i>'
+              ? '<i data-lucide="check-circle-2" class="w-6 h-6 text-path-green"></i>'
               : phase.status === 'in-progress' || phase.status === 'available'
                 ? '<i data-lucide="circle-dot" class="w-6 h-6 text-app-accent"></i>'
                 : '<i data-lucide="circle" class="w-6 h-6 text-app-border"></i>';
           const badge =
             phase.status === 'completed'
-              ? '<span class="text-xs text-[#10B981] font-medium border border-[#10B981] rounded px-2 py-1">Completed</span>'
+              ? '<span class="text-xs text-path-green font-medium border border-path-green rounded px-2 py-1">Completed</span>'
               : phase.status === 'in-progress'
                 ? '<span class="text-xs text-app-accent font-medium border border-app-accent rounded px-2 py-1">In Progress</span>'
                 : phase.status === 'available'
@@ -359,7 +415,7 @@ function renderRoadmap() {
                     const textClass =
                       lesson.status === 'locked' ? 'text-app-muted' : 'font-medium';
                     return `
-                      <div class="bg-[#121212] border border-app-border rounded p-4 flex items-center justify-between ${
+                      <div class="roadmap-station bg-app-field border border-app-border rounded-md p-4 flex items-center justify-between ${
                         clickable
                           ? 'group cursor-pointer hover:border-app-accent transition-colors'
                           : ''
@@ -773,6 +829,189 @@ function renderSidebar() {
     : 'Local profile';
 }
 
+function updateLocalClock() {
+  const el = document.getElementById('local-clock');
+  if (!el) return;
+  const now = new Date();
+  el.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+}
+
+function escapeXml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function selectCorridorStation(stationId, { silent } = {}) {
+  selectedStationId = stationId;
+  const station = corridorModel?.stations?.find((s) => s.id === stationId) || null;
+  const title = document.getElementById('map-callout-title');
+  const hint = document.getElementById('map-callout-hint');
+  const label = document.getElementById('map-callout-label');
+  const action = document.getElementById('map-callout-action');
+  if (!station) {
+    if (title) title.textContent = '—';
+    if (hint) hint.textContent = 'Pick a station on the map.';
+    if (action) {
+      action.disabled = true;
+      action.textContent = 'Open lesson';
+    }
+    return;
+  }
+  if (label) {
+    label.textContent = station.isNext
+      ? 'Next station'
+      : station.kind === 'action'
+        ? 'Start here'
+        : 'Selected station';
+  }
+  if (title) title.textContent = station.label;
+  if (hint) hint.textContent = station.sub;
+  if (action) {
+    const locked = station.action === 'locked';
+    action.disabled = locked;
+    if (station.action === 'generate') action.textContent = 'Generate roadmap';
+    else if (station.action === 'preferences') action.textContent = 'Open Preferences';
+    else if (locked) action.textContent = 'Locked';
+    else action.textContent = 'Open lesson';
+  }
+  document.querySelectorAll('#corridor-map-svg .corridor-station').forEach((node) => {
+    node.classList.toggle('is-selected', node.dataset.stationId === stationId);
+  });
+  if (!silent) lucide.createIcons();
+}
+
+function activateSelectedStation() {
+  const station = corridorModel?.stations?.find((s) => s.id === selectedStationId);
+  if (!station || station.action === 'locked') return;
+  if (station.action === 'generate') {
+    generateRoadmap();
+    return;
+  }
+  if (station.action === 'preferences') {
+    switchView('profile');
+    return;
+  }
+  if (station.phaseId && station.lessonId) {
+    openLesson(station.phaseId, station.lessonId);
+  }
+}
+
+function renderCorridorMap() {
+  corridorModel = buildCorridorMap({
+    roadmap: currentUser?.roadmap,
+    genres: currentUser?.genres || []
+  });
+
+  const legend = document.getElementById('corridor-legend');
+  if (legend) {
+    legend.innerHTML = (corridorModel.legend || [])
+      .map(
+        (item) => `
+      <span class="legend-item">
+        <span class="swatch" style="background:${item.color}"></span>
+        ${escapeXml(item.label)}
+      </span>`
+      )
+      .join('');
+  }
+
+  const courseLabel = document.getElementById('overview-course-label');
+  if (courseLabel) {
+    courseLabel.textContent = corridorModel.courseTitle
+      ? corridorModel.courseTitle
+      : 'Your learning corridor';
+  }
+
+  const svg = document.getElementById('corridor-map-svg');
+  if (!svg) return;
+  svg.setAttribute('viewBox', corridorModel.viewBox);
+
+  const routesMarkup = corridorModel.routes
+    .map(
+      (route) => `
+    <path class="corridor-route${route.dashed ? ' is-dashed' : ''}" data-route-id="${escapeXml(
+      route.id
+    )}" d="${route.d}" stroke="${route.color}"></path>`
+    )
+    .join('');
+
+  const stationsMarkup = corridorModel.stations
+    .map((station) => {
+      const labelY = station.y - 22;
+      const trunc =
+        station.label.length > 28 ? `${station.label.slice(0, 26)}…` : station.label;
+      const locked = station.status === 'locked';
+      const classes = [
+        'corridor-station',
+        locked ? 'is-locked' : '',
+        station.isNext ? 'is-next' : ''
+      ]
+        .filter(Boolean)
+        .join(' ');
+      return `
+      <g class="${classes}"
+         data-station-id="${escapeXml(station.id)}"
+         tabindex="${locked ? -1 : 0}"
+         role="button"
+         aria-label="${escapeXml(station.label)} — ${escapeXml(station.sub)}"
+         aria-disabled="${locked ? 'true' : 'false'}">
+        <circle class="station-ring" cx="${station.x}" cy="${station.y}" r="16" fill="transparent" stroke="transparent"></circle>
+        <circle class="station-disk" cx="${station.x}" cy="${station.y}" r="11" fill="${
+          locked ? '#B9AE9F' : station.color
+        }"></circle>
+        ${
+          station.status === 'completed'
+            ? `<circle cx="${station.x}" cy="${station.y}" r="4.5" fill="#F3EEE6"></circle>`
+            : ''
+        }
+        <text class="station-label" x="${station.x}" y="${labelY}" text-anchor="middle">${escapeXml(
+          trunc
+        )}</text>
+      </g>`;
+    })
+    .join('');
+
+  svg.innerHTML = `
+    <rect x="0" y="0" width="1000" height="640" fill="transparent"></rect>
+    ${routesMarkup}
+    ${stationsMarkup}
+  `;
+
+  svg.querySelectorAll('.corridor-station').forEach((node) => {
+    const id = node.dataset.stationId;
+    node.addEventListener('click', () => {
+      const station = corridorModel.stations.find((s) => s.id === id);
+      selectCorridorStation(id);
+      if (!station || station.action === 'locked') return;
+      if (station.kind === 'action' || station.isNext) activateSelectedStation();
+    });
+    node.addEventListener('dblclick', () => {
+      selectCorridorStation(id);
+      activateSelectedStation();
+    });
+    node.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        selectCorridorStation(id);
+        activateSelectedStation();
+      }
+    });
+  });
+
+  const preferred =
+    (corridorModel.next &&
+      corridorModel.stations.find(
+        (s) => s.phaseId === corridorModel.next.phaseId && s.lessonId === corridorModel.next.lessonId
+      )?.id) ||
+    corridorModel.stations.find((s) => s.action !== 'locked')?.id ||
+    corridorModel.stations[0]?.id ||
+    null;
+  selectCorridorStation(preferred, { silent: true });
+}
+
 function renderDashboard() {
   document.getElementById('dashboard-welcome').textContent =
     `Welcome back, ${currentUser.displayName}. You are on Day ${currentUser.dayCount} of your learning plan.`;
@@ -837,17 +1076,20 @@ function renderDashboard() {
 
   if (found) {
     nextTitle.textContent = found.lesson.title;
-    nextSub.textContent = `Current Goal: Master '${currentUser.roadmap.title}' (${found.lesson.duration})`;
+    nextSub.textContent = `Next on the corridor: ${found.lesson.title} (${found.lesson.duration}).`;
     nextBtnLabel.textContent = 'Resume Practice';
   } else if (currentUser.roadmap) {
     nextTitle.textContent = 'Roadmap complete';
-    nextSub.textContent = currentUser.roadmap.title;
+    nextSub.textContent = `${currentUser.roadmap.title} is complete. Generate a new course when you are ready.`;
     nextBtnLabel.textContent = 'View Roadmap';
   } else {
     nextTitle.textContent = 'Generate a roadmap';
-    nextSub.textContent = 'Set your skill and genres, then build a plan.';
+    nextSub.textContent = 'Set skill and genres, then build a course — stations appear on the map.';
     nextBtnLabel.textContent = 'Open Roadmap';
   }
+
+  updateLocalClock();
+  renderCorridorMap();
 }
 
 function renderPreferences() {
@@ -919,28 +1161,23 @@ function switchView(viewId) {
 
   const shellRail = document.getElementById('shell-rail');
   const main = document.querySelector('#app-shell > main');
-  const onDashboard = viewId === 'dashboard';
-  if (shellRail) shellRail.classList.toggle('hidden', onDashboard);
-  if (main) main.classList.toggle('p-8', !onDashboard);
+  if (shellRail) shellRail.classList.remove('hidden');
+  if (main) main.classList.toggle('p-8', viewId !== 'dashboard');
 
   document.querySelectorAll('#shell-rail .nav-link').forEach((el) => {
-    el.classList.remove('text-app-accent', 'bg-[#E0F4FA]');
-    el.classList.add('text-app-muted', 'hover:text-app-text', 'hover:bg-[#E8EEF3]');
-  });
-  document.querySelectorAll('#dashboard .r-nav-links .nav-link').forEach((el) => {
-    el.classList.remove('is-active');
+    el.classList.remove('text-app-accent', 'bg-app-field', 'is-active');
+    el.classList.add('text-app-muted', 'hover:text-app-text', 'hover:bg-app-field');
   });
 
-  const navId = viewId === 'lesson' ? 'roadmap' : viewId;
+  const navId = viewId === 'lesson' ? 'roadmap' : viewId === 'dashboard' ? 'dashboard' : viewId;
   const activeNav = document.getElementById('nav-' + navId);
   if (activeNav) {
-    activeNav.classList.remove('text-app-muted', 'hover:text-app-text', 'hover:bg-[#E8EEF3]');
-    activeNav.classList.add('text-app-accent', 'bg-[#E0F4FA]');
+    activeNav.classList.remove('text-app-muted', 'hover:text-app-text', 'hover:bg-app-field');
+    activeNav.classList.add('text-app-accent', 'bg-app-field', 'is-active');
   }
-  const dashNav = document.getElementById('dash-nav-' + navId);
-  if (dashNav) dashNav.classList.add('is-active');
 
   if (viewId === 'practice') refreshPracticeSession();
+  if (viewId === 'dashboard') renderCorridorMap();
   lucide.createIcons();
 }
 
@@ -950,23 +1187,56 @@ document.getElementById('pref-cloud').addEventListener('change', () => {
     .classList.toggle('hidden', !document.getElementById('pref-cloud').checked);
 });
 
+document.addEventListener('keydown', (event) => {
+  if (!activeDialogId) return;
+  const dialog = document.getElementById(activeDialogId);
+  if (!dialog || dialog.classList.contains('hidden')) return;
+
+  if (event.key === 'Escape') {
+    if (activeDialogId === 'skill-check-modal') {
+      event.preventDefault();
+      return;
+    }
+    if (activeDialogId === 'auth-gate') {
+      event.preventDefault();
+      return;
+    }
+  }
+
+  if (event.key !== 'Tab') return;
+  const focusables = getFocusable(dialog);
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
+
 function boot() {
   lucide.createIcons();
+  updateLocalClock();
+  if (clockTimerId) clearInterval(clockTimerId);
+  clockTimerId = setInterval(updateLocalClock, 30000);
   try {
     const sessionId = store.getSession();
     const profile = sessionId ? store.getProfile(sessionId) : null;
     if (profile) {
       enterApp(profile);
     } else {
-      document.getElementById('auth-gate').classList.remove('hidden');
       setAuthTab('signin');
+      openDialog('auth-gate', { initialFocus: '#auth-email' });
     }
   } catch (err) {
     if (err.code === 'STORAGE_CORRUPT') {
       alert('Local profile data looks corrupt. Clear site data for this page or continue as a new guest.');
     }
-    document.getElementById('auth-gate').classList.remove('hidden');
     setAuthTab('signin');
+    openDialog('auth-gate', { initialFocus: '#auth-email' });
   }
 }
 
@@ -996,7 +1266,8 @@ Object.assign(window, {
   logCurrentPractice,
   exportProfile,
   importProfile,
-  switchView
+  switchView,
+  activateSelectedStation
 });
 
 Object.defineProperty(window, 'skillCheckChoice', {

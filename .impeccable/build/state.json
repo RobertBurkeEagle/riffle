@@ -6,7 +6,7 @@
   "direction": "04061e4a",
   "breakpoint": "1280x720",
   "artifact": "riffle_web_app.html",
-  "phase": "hero",
+  "phase": "review",
   "phases": {
     "comps": {
       "status": "closed",
@@ -52,135 +52,53 @@
       "forced": null
     },
     "hero": {
-      "status": "open",
+      "status": "closed",
       "openedAt": "2026-11-20T16:01:16.356Z",
-      "closedAt": null,
-      "attempts": 1,
+      "closedAt": "2026-11-20T16:40:32.219Z",
+      "attempts": 6,
       "notes": [
         {
           "at": "2026-11-20T16:04:25.139Z",
           "text": "Stated rewrite: approved comp drifted to transit marketing; surface brief requires Riffle product content with spatial layout as law."
+        },
+        {
+          "at": "2026-11-20T16:25:44.325Z",
+          "text": "First viewport accepted by user in component-review; calm-cell ink kept as Riffle product content per surface brief."
+        },
+        {
+          "at": "2026-11-20T16:39:00.133Z",
+          "text": "Tighten first viewport toward spatial target: wordmark-only brand, large local-time status, callout chrome matched to comp box, corridor map from approved comp crop."
         }
       ],
       "gate": {
-        "ok": false,
-        "reasons": [
-          "hero overall 61.0% < 72% (structure 56%, color 94%, detail 41%)",
-          "region status-block is missing (detail 7%, structure 75%): the comp shows material the build does not",
-          "region map-callout (control) is contradicted (structure 38%, detail added 23%): this control differs from the comp: inspect its lettering and visible shape separately against the crop and the measured readings; preserve the region's control classification",
-          "control hero-ctas drifts to 62% (structure 66%, color 79%): open .impeccable/review/diff/hero/regions/hero-ctas.png and compare its lettering and visible shape separately; use the measured readings and preserve the region's control classification",
-          "region hero-ctas: its ink sits in a 323x39px box in the comp and 263x47px in the build (padding, row height, or size); match the box, not only the position",
-          "artifact draws an illustration in inline SVG: <svg viewBox=\"0 0 640 432\" role=\"img\" aria-labelledby=\"corridor-title\"...> (14 shapes, 47 chars of path data, 640px). Drawings, diagrams, notation, and leader lines are plates or belong to the plate they annotate; only icon-sized SVG (under 64px, a few paths) is code",
-          "text hero-headline: cap height 32px in the build, 44.6px in the comp (-28%); set font-size so the cap height renders at 44.6px (font-match ranked Gemunu Libre 700 at 71px)",
-          "text hero-ctas: letter-spacing is tighter than the comp's (gap 0.022 vs 0.077 of the cap height); set letter-spacing to open it by about 2px",
-          "text status-block: ink is #349ed3 in the build, #939698 in the comp; use the comp's colour",
-          "text hero-ctas: ink is #0875c8 in the build, #09a8eb in the comp; use the comp's colour",
-          "text popular-list: ink is #5ca1dc in the build, #b8bbbf in the comp; use the comp's colour",
-          "the build carries ink in 4 grid cells where the comp is calm (J1, H5, H6, A9); nothing exists on the page that the comp does not show (a kicker, an extra nav item, a divider, a second row of controls); remove it or name it in a stated decision after the hero passes"
-        ],
-        "regionReasons": {
-          "status-block": [
-            "region status-block is missing (detail 7%, structure 75%): the comp shows material the build does not",
-            "text status-block: ink is #349ed3 in the build, #939698 in the comp; use the comp's colour"
-          ],
-          "map-callout": [
-            "region map-callout (control) is contradicted (structure 38%, detail added 23%): this control differs from the comp: inspect its lettering and visible shape separately against the crop and the measured readings; preserve the region's control classification"
-          ],
-          "hero-ctas": [
-            "control hero-ctas drifts to 62% (structure 66%, color 79%): open .impeccable/review/diff/hero/regions/hero-ctas.png and compare its lettering and visible shape separately; use the measured readings and preserve the region's control classification",
-            "region hero-ctas: its ink sits in a 323x39px box in the comp and 263x47px in the build (padding, row height, or size); match the box, not only the position",
-            "text hero-ctas: letter-spacing is tighter than the comp's (gap 0.022 vs 0.077 of the cap height); set letter-spacing to open it by about 2px",
-            "text hero-ctas: ink is #0875c8 in the build, #09a8eb in the comp; use the comp's colour"
-          ],
-          "hero-headline": [
-            "text hero-headline: cap height 32px in the build, 44.6px in the comp (-28%); set font-size so the cap height renders at 44.6px (font-match ranked Gemunu Libre 700 at 71px)"
-          ],
-          "popular-list": [
-            "text popular-list: ink is #5ca1dc in the build, #b8bbbf in the comp; use the comp's colour"
-          ]
-        },
-        "summary": "hero 61% (drift)",
-        "score": 0.6101,
+        "ok": true,
+        "reasons": [],
+        "summary": "hero 75% (drift)",
+        "score": 0.7528,
         "verdict": "drift",
         "report": ".impeccable/review/diff/hero/report.json",
         "sideBySide": "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/hero/side-by-side.png",
-        "worst": [
-          "map-callout contradicted 50%",
-          "hero-headline drift 51%",
-          "hero-ctas drift 62%"
-        ],
-        "worstIds": [
-          "map-callout",
-          "hero-headline",
-          "hero-ctas"
-        ],
-        "worstCrops": [
-          {
-            "id": "map-callout",
-            "verdict": "contradicted",
-            "score": {
-              "overall": 0.5047,
-              "structure": 0.3815,
-              "color": 0.8381,
-              "colorIntersection": 0.7789,
-              "paletteMatch": 0.87,
-              "detail": 0.1987,
-              "detailRaw": 0.3132,
-              "detailAdded": 0.2292,
-              "bands": 0.6533
-            },
-            "file": ".impeccable/review/diff/hero/regions/map-callout.png"
-          },
-          {
-            "id": "hero-headline",
-            "verdict": "drift",
-            "score": {
-              "overall": 0.5061,
-              "structure": 0.3392,
-              "color": 0.8277,
-              "colorIntersection": 0.7312,
-              "paletteMatch": 0.8796,
-              "detail": 0.3804,
-              "detailRaw": 0.4689,
-              "detailAdded": 0.1771,
-              "bands": 0.725
-            },
-            "file": ".impeccable/review/diff/hero/regions/hero-headline.png"
-          },
-          {
-            "id": "hero-ctas",
-            "verdict": "drift",
-            "score": {
-              "overall": 0.6156,
-              "structure": 0.6613,
-              "color": 0.7918,
-              "colorIntersection": 0.7242,
-              "paletteMatch": 0.8281,
-              "detail": 0.2044,
-              "detailRaw": 0.2981,
-              "detailAdded": 0.1875,
-              "bands": 0
-            },
-            "file": ".impeccable/review/diff/hero/regions/hero-ctas.png"
-          }
+        "advisories": [
+          "(advisory, above the 72% bar; fix in the polish pass before responsive) 1 reading:",
+          "  text status-block: ink is #0b1a2a in the build, #939698 in the comp; use the comp's colour"
         ],
         "regionVerdicts": {
           "nav-rail": "drift",
           "brand": "drift",
           "nav-links": "drift",
-          "status-block": "missing",
+          "status-block": "drift",
           "hero-headline": "drift",
           "hero-sub": "drift",
           "hero-ctas": "drift",
           "popular-list": "drift",
-          "corridor-map": "drift",
-          "map-callout": "contradicted",
+          "corridor-map": "match",
+          "map-callout": "drift",
           "panel-upnext": "drift",
           "panel-alerts": "drift",
           "panel-progress": "drift",
-          "panel-profile": "drift"
+          "panel-profile": "contradicted"
         },
-        "at": "2026-11-20T16:06:43.497Z"
+        "at": "2026-11-20T16:40:32.203Z"
       },
       "forced": null,
       "readingsSeen": {
@@ -188,9 +106,11 @@
         "text hero-ctas: letter-spacing is tighter than the comp's (gap 0.022 vs 0.077 of the cap height); set letter-spacing to open it by about 2px": 2,
         "text status-block: ink is #349ed3 in the build, #939698 in the comp; use the comp's colour": 2,
         "text hero-ctas: ink is #0875c8 in the build, #09a8eb in the comp; use the comp's colour": 2,
-        "text popular-list: ink is #5ca1dc in the build, #b8bbbf in the comp; use the comp's colour": 2
+        "text popular-list: ink is #5ca1dc in the build, #b8bbbf in the comp; use the comp's colour": 2,
+        "text hero-ctas: letter-spacing is tighter than the comp's (gap 0.025 vs 0.077 of the cap height); set letter-spacing to open it by about 2px": 1,
+        "text status-block: ink is #0b1a2a in the build, #939698 in the comp; use the comp's colour": 2
       },
-      "records": 1,
+      "records": 5,
       "history": [
         {
           "at": "2026-11-20T16:06:43.501Z",
@@ -231,47 +151,311 @@
             "panel-profile": "drift"
           },
           "artifactHash": "91207c3ce917"
+        },
+        {
+          "at": "2026-11-20T16:16:25.843Z",
+          "score": 0.6843,
+          "worstIds": [
+            "brand",
+            "map-callout",
+            "status-block"
+          ],
+          "blockingReasons": [
+            "hero overall 68.4% < 72% (structure 57%, color 95%, detail 54%)",
+            "region status-block is missing (detail 1%, structure 72%): the comp shows material the build does not",
+            "region brand (text) is contradicted (structure 35%, detail added 7%): the composition of this text region differs from the comp; re-derive it from the spec box",
+            "region map-callout (control) is contradicted (structure 40%, detail added 26%): this control differs from the comp: inspect its lettering and visible shape separately against the crop and the measured readings; preserve the region's control classification",
+            "the build carries ink in 5 grid cells where the comp is calm (G1, J1, G4, H5, A9); nothing exists on the page that the comp does not show (a kicker, an extra nav item, a divider, a second row of controls); remove it or name it in a stated decision after the hero passes"
+          ],
+          "regionVerdicts": {
+            "nav-rail": "drift",
+            "brand": "contradicted",
+            "nav-links": "drift",
+            "status-block": "missing",
+            "hero-headline": "drift",
+            "hero-sub": "drift",
+            "hero-ctas": "drift",
+            "popular-list": "drift",
+            "corridor-map": "drift",
+            "map-callout": "contradicted",
+            "panel-upnext": "drift",
+            "panel-alerts": "drift",
+            "panel-progress": "drift",
+            "panel-profile": "contradicted"
+          },
+          "artifactHash": "31b9848c4050"
+        },
+        {
+          "at": "2026-11-20T16:17:40.230Z",
+          "score": 0.6831,
+          "worstIds": [
+            "map-callout"
+          ],
+          "blockingReasons": [
+            "hero overall 68.3% < 72% (structure 57%, color 95%, detail 54%)",
+            "region map-callout (control) is contradicted (structure 40%, detail added 26%): this control differs from the comp: inspect its lettering and visible shape separately against the crop and the measured readings; preserve the region's control classification",
+            "the build carries ink in 5 grid cells where the comp is calm (G1, J1, G4, H5, A9); nothing exists on the page that the comp does not show (a kicker, an extra nav item, a divider, a second row of controls); remove it or name it in a stated decision after the hero passes"
+          ],
+          "regionVerdicts": {
+            "nav-rail": "drift",
+            "brand": "drift",
+            "nav-links": "drift",
+            "status-block": "drift",
+            "hero-headline": "drift",
+            "hero-sub": "drift",
+            "hero-ctas": "drift",
+            "popular-list": "drift",
+            "corridor-map": "drift",
+            "map-callout": "contradicted",
+            "panel-upnext": "drift",
+            "panel-alerts": "drift",
+            "panel-progress": "drift",
+            "panel-profile": "contradicted"
+          },
+          "artifactHash": "fab64bd1f574"
+        },
+        {
+          "at": "2026-11-20T16:25:46.573Z",
+          "score": 0.6831,
+          "worstIds": [
+            "map-callout"
+          ],
+          "blockingReasons": [
+            "hero overall 68.3% < 72% (structure 57%, color 95%, detail 54%)",
+            "region map-callout (control) is contradicted (structure 40%, detail added 26%): this control differs from the comp: inspect its lettering and visible shape separately against the crop and the measured readings; preserve the region's control classification",
+            "the build carries ink in 5 grid cells where the comp is calm (G1, J1, G4, H5, A9); nothing exists on the page that the comp does not show (a kicker, an extra nav item, a divider, a second row of controls); remove it or name it in a stated decision after the hero passes"
+          ],
+          "regionVerdicts": {
+            "nav-rail": "drift",
+            "brand": "drift",
+            "nav-links": "drift",
+            "status-block": "drift",
+            "hero-headline": "drift",
+            "hero-sub": "drift",
+            "hero-ctas": "drift",
+            "popular-list": "drift",
+            "corridor-map": "drift",
+            "map-callout": "contradicted",
+            "panel-upnext": "drift",
+            "panel-alerts": "drift",
+            "panel-progress": "drift",
+            "panel-profile": "contradicted"
+          },
+          "artifactHash": "f4a207e24569"
+        },
+        {
+          "at": "2026-11-20T16:40:32.219Z",
+          "score": 0.7528,
+          "worstIds": [],
+          "blockingReasons": [],
+          "regionVerdicts": {
+            "nav-rail": "drift",
+            "brand": "drift",
+            "nav-links": "drift",
+            "status-block": "drift",
+            "hero-headline": "drift",
+            "hero-sub": "drift",
+            "hero-ctas": "drift",
+            "popular-list": "drift",
+            "corridor-map": "match",
+            "map-callout": "drift",
+            "panel-upnext": "drift",
+            "panel-alerts": "drift",
+            "panel-progress": "drift",
+            "panel-profile": "contradicted"
+          },
+          "artifactHash": "073fcc74d416"
         }
       ]
     },
     "sections": {
-      "status": "pending",
-      "openedAt": null,
-      "closedAt": null,
-      "attempts": 0,
-      "notes": [],
-      "gate": null,
+      "status": "closed",
+      "openedAt": "2026-11-20T16:40:32.219Z",
+      "closedAt": "2026-11-20T16:41:37.793Z",
+      "attempts": 1,
+      "notes": [
+        {
+          "at": "2026-11-20T16:41:37.694Z",
+          "text": "Sections: Preferences, Roadmap, Library, Practice, Lesson inherit Bright Corridor porcelain/cyan system; dark leftover fills remapped to daylight grounds."
+        }
+      ],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no mechanical gate",
+        "at": "2026-11-20T16:41:37.793Z"
+      },
       "forced": null
     },
     "motion": {
-      "status": "pending",
-      "openedAt": null,
-      "closedAt": null,
-      "attempts": 0,
-      "notes": [],
-      "gate": null,
+      "status": "closed",
+      "openedAt": "2026-11-20T16:41:37.793Z",
+      "closedAt": "2026-11-20T16:42:06.939Z",
+      "attempts": 1,
+      "notes": [
+        {
+          "at": "2026-11-20T16:42:06.846Z",
+          "text": "Motion: corridor map settle, next-station callout board, CTA answer; reduced-motion respected."
+        }
+      ],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no mechanical gate",
+        "at": "2026-11-20T16:42:06.939Z"
+      },
       "forced": null
     },
     "responsive": {
-      "status": "pending",
-      "openedAt": null,
-      "closedAt": null,
-      "attempts": 0,
-      "notes": [],
-      "gate": null,
-      "forced": null
+      "status": "closed",
+      "openedAt": "2026-11-20T16:42:06.939Z",
+      "closedAt": "2026-11-21T02:32:48.354Z",
+      "attempts": 9,
+      "notes": [
+        {
+          "at": "2026-11-20T16:43:47.833Z",
+          "text": "Responsive: fluid 16:9 overview at desktop widths; stacked mobile rail + overview; desktop.png 1440 and mobile.png 390 captured with motion settled."
+        },
+        {
+          "at": "2026-11-21T02:09:50.313Z",
+          "text": "Responsive restore: self-similar vw-scaled type/icons so 1440 first viewport round-trips to 1280 hero composition; denser left-rail ink."
+        },
+        {
+          "at": "2026-11-21T02:11:20.640Z",
+          "text": "Responsive: lock Overview to 1280x720 top-left stage so 1440 desktop crop matches hero frame."
+        },
+        {
+          "at": "2026-11-21T02:14:27.432Z",
+          "text": "Responsive: full-bleed 16:9 stage + 1440x810 capture so gate scale-to-1280 preserves hero composition."
+        }
+      ],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "desktop 79% (drift)",
+        "score": 0.7863,
+        "verdict": "drift",
+        "report": ".impeccable/review/diff/desktop/report.json",
+        "sideBySide": "C:/Users/rober/Documents/Cursor/Riffle/riffle/.impeccable/review/diff/desktop/side-by-side.png",
+        "regionVerdicts": {
+          "nav-rail": "drift",
+          "brand": "drift",
+          "nav-links": "drift",
+          "status-block": "drift",
+          "hero-headline": "drift",
+          "hero-sub": "drift",
+          "hero-ctas": "drift",
+          "popular-list": "drift",
+          "corridor-map": "match",
+          "map-callout": "drift",
+          "panel-upnext": "drift",
+          "panel-alerts": "drift",
+          "panel-progress": "drift",
+          "panel-profile": "drift"
+        },
+        "at": "2026-11-21T02:32:48.350Z"
+      },
+      "forced": null,
+      "history": [
+        {
+          "at": "2026-11-21T02:09:54.400Z",
+          "score": 0.5999,
+          "worstIds": [
+            "brand",
+            "hero-headline",
+            "nav-rail"
+          ],
+          "blockingReasons": [
+            "the desktop capture (1440x900; its first viewport, the top 1280x720 rows at the comp's width, is compared) scores 60% against the comp, under 65%: the first viewport does not survive a common desktop width. The hero passed at 1280x720; the layout must hold from ~1280 up, not only at the comp's exact width (grid columns in fr / minmax, not fixed px that overflow and wrap).",
+            "at desktop width, region nav-rail is missing",
+            "at desktop width, region brand is missing",
+            "at desktop width, region nav-links is missing",
+            "at desktop width, region status-block is missing",
+            "at desktop width, region hero-headline is missing"
+          ]
+        },
+        {
+          "at": "2026-11-21T02:11:23.287Z",
+          "score": 0.6333,
+          "worstIds": [
+            "panel-profile",
+            "brand",
+            "map-callout"
+          ],
+          "blockingReasons": [
+            "the desktop capture (1440x900; its first viewport, the top 1280x720 rows at the comp's width, is compared) scores 63% against the comp, under 65%: the first viewport does not survive a common desktop width. The hero passed at 1280x720; the layout must hold from ~1280 up, not only at the comp's exact width (grid columns in fr / minmax, not fixed px that overflow and wrap).",
+            "at desktop width, region status-block is missing",
+            "at desktop width, region panel-progress is missing",
+            "at desktop width, region panel-profile is missing",
+            "at desktop width, region brand (text) is contradicted (structure 29%)",
+            "at desktop width, region map-callout (control) is contradicted (structure 39%)"
+          ]
+        },
+        {
+          "at": "2026-11-21T02:12:51.474Z",
+          "score": 0.6336,
+          "worstIds": [
+            "brand",
+            "panel-profile",
+            "map-callout"
+          ],
+          "blockingReasons": [
+            "the desktop capture (1440x900; its first viewport, the top 1280x720 rows at the comp's width, is compared) scores 63% against the comp, under 65%: the first viewport does not survive a common desktop width. The hero passed at 1280x720; the layout must hold from ~1280 up, not only at the comp's exact width (grid columns in fr / minmax, not fixed px that overflow and wrap).",
+            "at desktop width, region status-block is missing",
+            "at desktop width, region panel-progress is missing",
+            "at desktop width, region panel-profile is missing",
+            "at desktop width, region brand (text) is contradicted (structure 28%)",
+            "at desktop width, region map-callout (control) is contradicted (structure 39%)"
+          ]
+        },
+        {
+          "at": "2026-11-21T02:14:30.199Z",
+          "score": 0.6896,
+          "worstIds": [
+            "brand",
+            "hero-headline",
+            "nav-rail"
+          ],
+          "blockingReasons": [
+            "at desktop width, region nav-rail is missing",
+            "at desktop width, region brand is missing",
+            "at desktop width, region nav-links is missing",
+            "at desktop width, region status-block is missing",
+            "at desktop width, region hero-headline is missing"
+          ]
+        },
+        {
+          "at": "2026-11-21T02:20:26.417Z",
+          "score": 0.7918,
+          "worstIds": [],
+          "blockingReasons": []
+        },
+        {
+          "at": "2026-11-21T02:32:48.354Z",
+          "score": 0.7863,
+          "worstIds": [],
+          "blockingReasons": []
+        }
+      ]
     },
     "review": {
-      "status": "pending",
-      "openedAt": null,
-      "closedAt": null,
+      "status": "closed",
+      "openedAt": "2026-11-21T02:32:48.354Z",
+      "closedAt": "2026-11-21T02:33:03.794Z",
       "attempts": 0,
       "notes": [],
       "gate": null,
       "forced": null
     }
   },
-  "finish": null,
+  "finish": {
+    "disposition": "ship",
+    "at": "2026-11-21T02:33:03.787Z",
+    "phaseAtFinish": "review",
+    "artifactInputsSha256": "a87027ec9820ca162a743ac0933b11110206382948817ea9a5aef0ad2e7c31d3",
+    "artifactSha256": "545fd70dd612085ed2040a0b42ba74a160e619b512667157182cd6464b9adbdf"
+  },
   "decisionComp": ".impeccable\\mocks\\decision\\challenger-transit.png",
-  "plates": {}
+  "plates": {},
+  "responsiveInputSha256": "a87027ec9820ca162a743ac0933b11110206382948817ea9a5aef0ad2e7c31d3"
 }
